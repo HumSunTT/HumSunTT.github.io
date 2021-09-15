@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Git搭建本地远程仓库</title>
+    <url>/HumSunTT/HumSunTT.github.io/2021/09/15/Git%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h1 id="Git学习"><a href="#Git学习" class="headerlink" title="Git学习"></a>Git学习</h1><h2 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h2><h2 id="git配置本地远程仓库"><a href="#git配置本地远程仓库" class="headerlink" title="git配置本地远程仓库"></a>git配置本地远程仓库</h2><p>在本地的移动硬盘中创建git远程仓库，将电脑中的数据同步到git仓库中。</p>
+<h3 id="创建远程仓库"><a href="#创建远程仓库" class="headerlink" title="创建远程仓库"></a>创建远程仓库</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd /Volumes/MacOS/</span><br><span class="line">mkdir workSpace</span><br><span class="line">cd workSpace</span><br><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+<h3 id="关联远程仓库"><a href="#关联远程仓库" class="headerlink" title="关联远程仓库"></a>关联远程仓库</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd &quot;实际工作目录&quot;</span><br><span class="line">git init   #初始化git目录</span><br><span class="line">git add .  #添加修改至临时缓存区</span><br><span class="line">git commit -m &quot;init&quot;  #提交至本地仓库</span><br><span class="line">git remote add origin /Volumes/MacOS/workSpace  #关联远程仓库的位置</span><br><span class="line">git push -u origin master #向远程仓库提交</span><br></pre></td></tr></table></figure>
+<p>此时会报错</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git push -u origin master</span><br><span class="line"></span><br><span class="line">Counting objects: 4, done.</span><br><span class="line">Delta compression using up to 16 threads.</span><br><span class="line">Compressing objects: 100% (2/2), done.</span><br><span class="line">Writing objects: 100% (4/4), 245 bytes | 0 bytes/s, done.</span><br><span class="line">Total 4 (delta 0), reused 0 (delta 0)</span><br><span class="line">remote: error: refusing to update checked out branch: refs/heads/master</span><br><span class="line">remote: error: By default, updating the current branch in a non-bare repository</span><br><span class="line">remote: error: is denied, because it will make the index and work tree inconsistent</span><br><span class="line">remote: error: with what you pushed, and will require &#x27;git reset --hard&#x27; to match</span><br><span class="line">remote: error: the work tree to HEAD.</span><br><span class="line">remote: error: </span><br><span class="line">remote: error: You can set &#x27;receive.denyCurrentBranch&#x27; configuration variable to</span><br><span class="line">remote: error: &#x27;ignore&#x27; or &#x27;warn&#x27; in the remote repository to allow pushing into</span><br><span class="line">remote: error: its current branch; however, this is not recommended unless you</span><br><span class="line">remote: error: arranged to update its work tree to match what you pushed in some</span><br><span class="line">remote: error: other way.</span><br><span class="line">remote: error: </span><br><span class="line">remote: error: To squelch this message and still keep the default behaviour, set</span><br><span class="line">remote: error: &#x27;receive.denyCurrentBranch&#x27; configuration variable to &#x27;refuse&#x27;.</span><br><span class="line">To /home/lu/Temp/git_server/Test/</span><br><span class="line"> ! [remote rejected] master -&gt; master (branch is currently checked out)</span><br><span class="line">error: failed to push some refs to &#x27;/home/lu/Temp/git_server/Test/</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>因为我们的远程仓库也只是一般的仓库而不是裸仓库，如果是裸仓库的话就不会出现这个问题了。<br>根据错误提示，我们可以进行相应的配置：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git config --global receive.denyCurrentBranch ignore</span><br></pre></td></tr></table></figure>
+<p>也可以直接修改配置文件：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim ~/.gitconfig</span><br><span class="line"></span><br><span class="line">在文件中添加以下内容即可</span><br><span class="line">[receive]</span><br><span class="line">    denyCurrentBranch = ignore</span><br></pre></td></tr></table></figure>
+<p>配置完后，再push一次。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git push -u origin master</span><br><span class="line"></span><br><span class="line">Counting objects: 4, done.</span><br><span class="line">Delta compression using up to 16 threads.</span><br><span class="line">Compressing objects: 100% (2/2), done.</span><br><span class="line">Writing objects: 100% (4/4), 245 bytes | 0 bytes/s, done.</span><br><span class="line">Total 4 (delta 0), reused 0 (delta 0)</span><br><span class="line">To /home/lu/Temp/git_server/Test/</span><br><span class="line"> * [new branch]      master -&gt; master</span><br><span class="line">Branch master set up to track remote branch master from origin.</span><br></pre></td></tr></table></figure>
+
+<p>提交上去了，但是目前远程仓库中还看不到提交的数据<br>git status可以看到，但是没有写到磁盘上</p>
+<h3 id="添加git-hook"><a href="#添加git-hook" class="headerlink" title="添加git hook"></a>添加git hook</h3><p>git hook是一个非常强大的功能，它可以监听我们对仓库的修改，继而触发相应的逻辑命令。这里为了完成同事的需求，只说说post-update，就是提交有代码更新到仓库时需要执行的操作。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd .git/hooks</span><br><span class="line">mv post-update.sample post-update</span><br><span class="line">vim post-update</span><br></pre></td></tr></table></figure>
+<p>修改内容</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># An example hook script to prepare a packed repository for use over</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> dumb transports.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># To enable this hook, rename this file to &quot;post-update&quot;.</span></span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">exec</span> git update-server-info</span></span><br><span class="line">unset GIT_DIR</span><br><span class="line">cd ..</span><br><span class="line">git checkout -f</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改完成"><a href="#修改完成" class="headerlink" title="修改完成"></a>修改完成</h3><p>再次push</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &quot;demo&quot; &gt; demo #修改某些文件</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;add demo&quot;</span><br><span class="line">git push</span><br><span class="line">Counting objects: 3, done.</span><br><span class="line">Delta compression using up to 16 threads.</span><br><span class="line">Compressing objects: 100% (2/2), done.</span><br><span class="line">Writing objects: 100% (3/3), 288 bytes | 0 bytes/s, done.</span><br><span class="line">Total 3 (delta 0), reused 0 (delta 0)</span><br><span class="line">To /home/lu/Temp/git_server/Test/</span><br><span class="line">   7be5b2a..9da7116  master -&gt; master</span><br></pre></td></tr></table></figure>
+<p>提交之后可查看移动硬盘中的远程仓库，已经上传成功。</p>
+<h2 id="借助百度网盘实现实时同步"><a href="#借助百度网盘实现实时同步" class="headerlink" title="借助百度网盘实现实时同步"></a>借助百度网盘实现实时同步</h2><p>下载百度同步网盘MAC版<br><a href="https://pan.baidu.com/download#pan">https://pan.baidu.com/download#pan</a><br>百度网盘新建文件夹GitSpace，用于存放同步数据。<br>本地新建GitSpace，在此文件夹下创建各项目子文件夹及git仓库。<br>选择同步即可。</p>
+]]></content>
+      <categories>
+        <category>Git学习</category>
+      </categories>
+      <tags>
+        <tag>tips</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/HumSunTT/HumSunTT.github.io/2021/09/15/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -17,11 +51,6 @@
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>test</title>
-    <url>/HumSunTT/HumSunTT.github.io/2021/09/15/test/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>Hexo&amp;Github搭建私人博客</title>
@@ -165,37 +194,8 @@
       </tags>
   </entry>
   <entry>
-    <title>Git搭建本地远程仓库</title>
-    <url>/HumSunTT/HumSunTT.github.io/2021/09/15/Git%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<h1 id="Git学习"><a href="#Git学习" class="headerlink" title="Git学习"></a>Git学习</h1><h2 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h2><h2 id="git配置本地远程仓库"><a href="#git配置本地远程仓库" class="headerlink" title="git配置本地远程仓库"></a>git配置本地远程仓库</h2><p>在本地的移动硬盘中创建git远程仓库，将电脑中的数据同步到git仓库中。</p>
-<h3 id="创建远程仓库"><a href="#创建远程仓库" class="headerlink" title="创建远程仓库"></a>创建远程仓库</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd /Volumes/MacOS/</span><br><span class="line">mkdir workSpace</span><br><span class="line">cd workSpace</span><br><span class="line">git init</span><br></pre></td></tr></table></figure>
-
-<h3 id="关联远程仓库"><a href="#关联远程仓库" class="headerlink" title="关联远程仓库"></a>关联远程仓库</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd &quot;实际工作目录&quot;</span><br><span class="line">git init   #初始化git目录</span><br><span class="line">git add .  #添加修改至临时缓存区</span><br><span class="line">git commit -m &quot;init&quot;  #提交至本地仓库</span><br><span class="line">git remote add origin /Volumes/MacOS/workSpace  #关联远程仓库的位置</span><br><span class="line">git push -u origin master #向远程仓库提交</span><br></pre></td></tr></table></figure>
-<p>此时会报错</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git push -u origin master</span><br><span class="line"></span><br><span class="line">Counting objects: 4, done.</span><br><span class="line">Delta compression using up to 16 threads.</span><br><span class="line">Compressing objects: 100% (2/2), done.</span><br><span class="line">Writing objects: 100% (4/4), 245 bytes | 0 bytes/s, done.</span><br><span class="line">Total 4 (delta 0), reused 0 (delta 0)</span><br><span class="line">remote: error: refusing to update checked out branch: refs/heads/master</span><br><span class="line">remote: error: By default, updating the current branch in a non-bare repository</span><br><span class="line">remote: error: is denied, because it will make the index and work tree inconsistent</span><br><span class="line">remote: error: with what you pushed, and will require &#x27;git reset --hard&#x27; to match</span><br><span class="line">remote: error: the work tree to HEAD.</span><br><span class="line">remote: error: </span><br><span class="line">remote: error: You can set &#x27;receive.denyCurrentBranch&#x27; configuration variable to</span><br><span class="line">remote: error: &#x27;ignore&#x27; or &#x27;warn&#x27; in the remote repository to allow pushing into</span><br><span class="line">remote: error: its current branch; however, this is not recommended unless you</span><br><span class="line">remote: error: arranged to update its work tree to match what you pushed in some</span><br><span class="line">remote: error: other way.</span><br><span class="line">remote: error: </span><br><span class="line">remote: error: To squelch this message and still keep the default behaviour, set</span><br><span class="line">remote: error: &#x27;receive.denyCurrentBranch&#x27; configuration variable to &#x27;refuse&#x27;.</span><br><span class="line">To /home/lu/Temp/git_server/Test/</span><br><span class="line"> ! [remote rejected] master -&gt; master (branch is currently checked out)</span><br><span class="line">error: failed to push some refs to &#x27;/home/lu/Temp/git_server/Test/</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>因为我们的远程仓库也只是一般的仓库而不是裸仓库，如果是裸仓库的话就不会出现这个问题了。<br>根据错误提示，我们可以进行相应的配置：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git config --global receive.denyCurrentBranch ignore</span><br></pre></td></tr></table></figure>
-<p>也可以直接修改配置文件：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim ~/.gitconfig</span><br><span class="line"></span><br><span class="line">在文件中添加以下内容即可</span><br><span class="line">[receive]</span><br><span class="line">    denyCurrentBranch = ignore</span><br></pre></td></tr></table></figure>
-<p>配置完后，再push一次。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git push -u origin master</span><br><span class="line"></span><br><span class="line">Counting objects: 4, done.</span><br><span class="line">Delta compression using up to 16 threads.</span><br><span class="line">Compressing objects: 100% (2/2), done.</span><br><span class="line">Writing objects: 100% (4/4), 245 bytes | 0 bytes/s, done.</span><br><span class="line">Total 4 (delta 0), reused 0 (delta 0)</span><br><span class="line">To /home/lu/Temp/git_server/Test/</span><br><span class="line"> * [new branch]      master -&gt; master</span><br><span class="line">Branch master set up to track remote branch master from origin.</span><br></pre></td></tr></table></figure>
-
-<p>提交上去了，但是目前远程仓库中还看不到提交的数据<br>git status可以看到，但是没有写到磁盘上</p>
-<h3 id="添加git-hook"><a href="#添加git-hook" class="headerlink" title="添加git hook"></a>添加git hook</h3><p>git hook是一个非常强大的功能，它可以监听我们对仓库的修改，继而触发相应的逻辑命令。这里为了完成同事的需求，只说说post-update，就是提交有代码更新到仓库时需要执行的操作。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd .git/hooks</span><br><span class="line">mv post-update.sample post-update</span><br><span class="line">vim post-update</span><br></pre></td></tr></table></figure>
-<p>修改内容</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># An example hook script to prepare a packed repository for use over</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> dumb transports.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="bash"><span class="comment"># To enable this hook, rename this file to &quot;post-update&quot;.</span></span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">exec</span> git update-server-info</span></span><br><span class="line">unset GIT_DIR</span><br><span class="line">cd ..</span><br><span class="line">git checkout -f</span><br></pre></td></tr></table></figure>
-
-<h3 id="修改完成"><a href="#修改完成" class="headerlink" title="修改完成"></a>修改完成</h3><p>再次push</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &quot;demo&quot; &gt; demo #修改某些文件</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;add demo&quot;</span><br><span class="line">git push</span><br><span class="line">Counting objects: 3, done.</span><br><span class="line">Delta compression using up to 16 threads.</span><br><span class="line">Compressing objects: 100% (2/2), done.</span><br><span class="line">Writing objects: 100% (3/3), 288 bytes | 0 bytes/s, done.</span><br><span class="line">Total 3 (delta 0), reused 0 (delta 0)</span><br><span class="line">To /home/lu/Temp/git_server/Test/</span><br><span class="line">   7be5b2a..9da7116  master -&gt; master</span><br></pre></td></tr></table></figure>
-<p>提交之后可查看移动硬盘中的远程仓库，已经上传成功。</p>
-<h2 id="借助百度网盘实现实时同步"><a href="#借助百度网盘实现实时同步" class="headerlink" title="借助百度网盘实现实时同步"></a>借助百度网盘实现实时同步</h2><p>下载百度同步网盘MAC版<br><a href="https://pan.baidu.com/download#pan">https://pan.baidu.com/download#pan</a><br>百度网盘新建文件夹GitSpace，用于存放同步数据。<br>本地新建GitSpace，在此文件夹下创建各项目子文件夹及git仓库。<br>选择同步即可。</p>
-]]></content>
-      <categories>
-        <category>Git学习</category>
-      </categories>
-      <tags>
-        <tag>tips</tag>
-      </tags>
+    <title>test</title>
+    <url>/HumSunTT/HumSunTT.github.io/2021/09/15/test/</url>
+    <content><![CDATA[]]></content>
   </entry>
 </search>
