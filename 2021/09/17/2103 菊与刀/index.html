@@ -1,0 +1,785 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Hero&#39;s Wings">
+  <meta name="keywords" content="">
+  
+  <title>菊与刀 - HumSunTT&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"humsuntt.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>HumSunTT's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg1.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="菊与刀">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Hero's Wings
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-17 08:41" pubdate>
+        2021年9月17日 早上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      9.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      94
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">菊与刀</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：几秒前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="菊与刀"><a href="#菊与刀" class="headerlink" title="菊与刀"></a>菊与刀</h2><p>[美] 鲁思·本尼迪克特</p>
+<p>2021年3月15日 </p>
+<p>“对德国，政策很明确，即武装占领，直接管制。对日本，当时有两大问题需要研究：第一，日本政府会不会投降？盟军是否要进攻日本本土而采用对付德国的办法？第二，假若日本投降，美国是否应当利用日本政府机构以至保存天皇？”</p>
+<p>2021年3月15日 </p>
+<p>“菊”本是日本皇家家徽，“刀”是武家文化的象征。”</p>
+<p>2021年3月15日 </p>
+<p>“以“菊”和“刀”来象征日本人的矛盾性格，亦即日本文化的双重性”</p>
+<p>2021年3月15日 </p>
+<p>“日本幼儿教养和成人教养的不连续性是形成双重性格的重要因素”</p>
+<p>2021年3月15日 </p>
+<p>“日本文化的特征概括为“耻感文化”，认为它与西方的“罪感文化”不同，其强制力在于外部社会而不在于人的内心”</p>
+<p>2021年3月15日 </p>
+<p>“从历史唯物主义观点看来，文化属于上层建筑，其核心是社会意识形态，它反映经济基础并受经济基础的制约”</p>
+<p>2021年3月15日 </p>
+<p>“但文化又有其相对的独立性，各民族的文化各有其历史形成的特点并反作用于经济基础”</p>
+<p>2021年3月15日 </p>
+<p>“西方国家所公认的那些基于人性的战争惯例，对日本人则显然不存在。”</p>
+<p>2021年3月15日 </p>
+<p>“在战争中把一切都归咎于敌国，这是容易的；但要想知道敌人自己心目中对人生的看法就难得多了”</p>
+<p>2021年3月16日 </p>
+<p>“有坚定精神的人认为差异应当存在。他们尊重差异。他们的目标是确立一个能容纳各种差异的安全世界”</p>
+<p>2021年3月16日 </p>
+<p>“这次战争并不是军备的较量，而是日本人信赖精神与美国人信赖物质的战争”</p>
+<p>2021年3月16日 </p>
+<p>“美国人对一切救援行动，对陷入困境者的一切帮助都深为感动。勇敢的行为，如果使受难者获救，就更加是英雄行为”</p>
+<p>2021年3月16日 </p>
+<p>“他们的报纸、广播反复谈论这个话题，只有视死如归的冒险才是最高尚的，而小心谨慎则是无价值的。”</p>
+<p>2021年3月16日 </p>
+<p>“武士政权”统治时期演变为最高尊称。1192年，源氏武士集团首领源赖朝统一全国，在镰仓建立幕府后，将军作为“幕府”首脑掌握全国政权，世袭继承。镰仓、室町、江户三个“幕府时代”共约近700年，各由源氏、足利氏、德川氏世袭继承。明治维新中废除幕府和将军（1867）”</p>
+<p>2021年3月16日 </p>
+<p>“商人阶级总是封建制度的破坏者。商人一旦受到尊敬而繁荣，封建制度就会衰亡”</p>
+<p>2021年3月16日 </p>
+<p>“武士无须考虑生活来源，他完全成了仰赖领主者”</p>
+<p>2021年3月16日 </p>
+<p>“一个人的勇气和完美表现在与这些规范保持一致，而不是反抗或修改这些规范”</p>
+<p>2021年3月16日 </p>
+<p>“市民阶级：英文原著为“Bourgeosie”。此词原指欧洲中世纪末期城镇中既非贵族，亦非农民的商人、手工业者等。分化为雇主、雇工后，此词则指雇主。我国初采音译：“布尔乔亚”，其后译作“资产者”、“资产阶级”，有时也译作“中产者”或“市民阶级”</p>
+<p>2021年3月16日 </p>
+<p>“他们从来没有把自己的任务看成是意识形态的革命，而是当作一项事业”</p>
+<p>2021年3月16日 </p>
+<p>“日本将在“长辈”的领导下稳步前进，并可克服很多个人主义国家中无法避免的种种困难”</p>
+<p>2021年3月17日 </p>
+<p>“地方上的事必须由地方解决。日本人的生活方式是，分别分配适当的权力并规定其行使范围”</p>
+<p>2021年3月17日 </p>
+<p>“万物各得其所，各安其分。”</p>
+<p>2021年3月17日 </p>
+<p>“日本人还喜欢远途朝山拜庙，这也是愉快的休假。”</p>
+<p>2021年3月17日 </p>
+<p>“他们不喜欢随便受恩而背上人情债。他们常常谈及“使人受恩”，译成英文，最接近的词句是“imposing upon another”。但在美国，“imposing”，含有强求别人的意思。而在日本，“让人受恩”则表示给别人一些东西或者帮别人的忙”</p>
+<p>2021年3月17日 </p>
+<p>“明治维新以前，有一条人人熟知的法令：“遇有争端，无关者不得干预。”</p>
+<p>2021年3月17日 </p>
+<p>“表示谢意的最礼貌的说法是：“真过意不去”（日语是“気の毒”</p>
+<p>2021年3月17日 </p>
+<p>“小店主经常挂在嘴上的是“すみません，済みません”。这个词（すみません）的本意是：“这怎么得了呢？”即“我受了您的恩。但在目前经济安排下，我永远无法偿还，感到非常遗憾”。”</p>
+<p>2021年3月17日 </p>
+<p>“日本的老派店员在向顾客道谢时，仍使用“かたじけなぃ”（诚惶诚恐），顾客买货要求赊账时也说“かたじけなぃ”。这个词在明治以前的小说中，是经常出现的”</p>
+<p>2021年3月17日 </p>
+<p>“一个人一旦选择了让别人（哪怕是自己的子女）感受重恩的做法，那他要想改变这种做法，就必须牺牲自己。”</p>
+<p>2021年3月17日 </p>
+<p>“他们所说的“难以报恩于万一”。这种义务包括两类：一类是报答父母的恩——孝，另一类是报答天皇的恩——“忠”。”</p>
+<p>2021年3月17日 </p>
+<p>“日本的初等教育被称为“义务教育”，这实在是太恰当了，没有其他词能如此表达其“必修”之意。人的一生中的偶然事件可能改变义务的某些细节，但义务则是自动加在一切人身上并超越一切偶然情况的。”</p>
+<p>2021年3月17日 </p>
+<p>“七世纪以来，日本一再从中国引进伦理体系，“忠”、“孝”原来都是汉文。但是，中国人并没有把这些道德看成是无条件的。在中国，忠孝是有条件的，忠孝之上还有更高的道德，那就是“仁”，通常被译作“benevolence”（慈善、博爱），但它的含义几乎包罗了西方一切良好的人际关系”</p>
+<p>2021年3月17日 </p>
+<p>“在日本，这些观点显然与天皇制不相容，所以，即使作为学术理论，也从未全盘接受过。”②事实上，“仁”在日本是被排斥在伦理体系之外的德目，丧失了它在中国伦理体系中所具有的崇高地位。”</p>
+<p>2021年3月17日 </p>
+<p>“日本的孝道和中国的不一样，其范围不包括几百年前的祖先世系，也不包括所衍生的庞大宗族。日本人的祖先崇拜只限于近祖。”</p>
+<p>2021年3月17日 </p>
+<p>“日本所重视的孝道对象，只限于记忆中的祖先；他们注重的是现时现地。许多专著都论述到，日本人缺乏抽象思辨和构想非现实形象的兴趣。”</p>
+<p>2021年3月17日 </p>
+<p>“明治初期政治家在考察西方各国之后写道：那些国家的历史都是统治者与人民之间冲突的历史，这不符合日本精神。回国后，他们在宪法中写道，天皇“神圣不可侵犯”，对国务大臣的任何行为都不负责任。”</p>
+<p>2021年3月17日 </p>
+<p>“真正的根本性变动是在精神领域，因为，“忠”已变成每个日本人对神圣首领——最高主祭者和日本统一与永恒的象征——的报恩。”</p>
+<p>2021年3月17日 </p>
+<p>“明治维新以前一百年间，反德川势力利用的正是“万世一系”这个论据，而不是天皇神裔理论”</p>
+<p>2021年3月17日 </p>
+<p>“一方面，臣民向上直接对天皇，其间没有中介，他们自己用行动来使“陛下安心”；另一方面，天皇的敕令，又是经过天皇与大臣之间的各种中介者之手，层层传到他们耳朵的”</p>
+<p>2021年3月17日 </p>
+<p>“在美国，自尊心是与自己处理自己的事联系在一起的；在日本，自尊心则是与对施恩者报恩联系在一起的。”</p>
+<p>2021年3月17日 </p>
+<p>“他们获得了最珍视的东西，他们有权力说：这是天皇的命令，即使是投降的命令。也就是说，即使投降，最高的法律仍然是“忠”。”</p>
+<p>2021年3月17日 </p>
+<p>“义理”包含一系列混杂的义务”</p>
+<p>2021年3月17日 </p>
+<p>“从报答旧恩直到复仇”</p>
+<p>2021年3月17日 </p>
+<p>“义理”有显然不同的两类。一类我称之为“对社会的义理”，按字面解释就是“报答义理”，亦即向同伙人报恩的义务；另一类我称之为“对名誉的义理”，大体上类似于德国人的“名誉”，即保持名誉不受任何玷污的责任。“对社会的义理”可以大体描述为履行契约性的关系，它与“义务”的区别在于后者是履行生而具有的亲属责任”</p>
+<p>2021年3月17日 </p>
+<p>“在日本，婚姻当然是家庭与家庭之间的契约关系。对配偶的家庭终身履行契约性义务，就是“履行义理”，其中最沉重的是对安排此项契约的父母的“义理”。”</p>
+<p>2021年3月17日 </p>
+<p>“。对姻亲的义务则不能含糊，不论多大代价，必须履行，以免遭受世人谴责，说“此人不懂‘义理’”，这种谴责是令人可怕的。”</p>
+<p>2021年3月17日 </p>
+<p>“在德川氏未统一全国以前的日本，这种德行之重大在人们心目中超过当时的“忠”，即对将军的义务”</p>
+<p>2021年3月17日 </p>
+<p>“浪人（没有主君，依靠自己谋生的武士）”</p>
+<p>2021年3月17日 </p>
+<p>“日本人对颂扬复仇和颂扬捐躯尽忠，同样津津乐道。两者都是“义理”。尽忠是对主君的“义理”，对侮辱进行复仇则是对自身名分的“义理”。在日本，这是一块盾牌的两面。”</p>
+<p>2021年3月17日 </p>
+<p>“这些说法都有“不愿意”、“只是为了情面”的含义，恰如辞典解释的那样：“for ‘mere decency’s sake”。”</p>
+<p>仅仅为了得体的目的。</p>
+<p>2021年3月17日 </p>
+<p>“一个人迫于“义理”，有时竟不得不无视正义。他们常说：“为了义理，我不能坚持正义”。”</p>
+<p>2021年3月17日 </p>
+<p>“对社会的义理”在英语中常常被译为“conformity to public opinion”（服从舆论）。”</p>
+<p>2021年3月17日 </p>
+<p>“美国人毫不介意、根本想不到会涉及义务的那些细小言行，日本人都要一一慎重对待；这意味终年在复杂环境中谨小慎微，唯恐有失。”</p>
+<p>2021年3月17日 </p>
+<p>“野口英世（1876—1928）”</p>
+<p>2021年3月17日 </p>
+<p>“对名分的“义理”，就是使名声不受玷污的义务。这种“义理”由一系列德行构成，在西欧人看来，有的互相矛盾，但对日本人来说则是完全统一的。因为这类义务不是报恩，不属于“恩的范围”，不涉及往日受恩于别人的问题，而是保持自身名誉的行为。”</p>
+<p>2021年3月17日 </p>
+<p>“日本人就是这样认为的。一个正派的人对恩惠和侮辱都同样感受强烈，都要认真回报。他们不像我们那样，把两者区别开来，一种称之为侵犯，另一种称之为非侵犯。在他看来，只有“义理”范围之外的行为才能称作侵犯。只要是遵守“义理”，洗刷污名，就绝不能说他犯了侵犯之罪，他只不过是算清旧账”</p>
+<p>2021年3月17日 </p>
+<p>“无论在日本，还是在西欧各国，凡是这种重视雪除名誉污点的道德观占优势的地方，其道德的核心总是超越一切物质意义的利益。一个人越是为了“名誉”牺牲其财产、家庭及自己的生命，就越被认为是道德高尚的人，它成为道德定义本身的一部分，是这些国家经常提倡的“精神”价值的基础”</p>
+<p>2021年3月17日 </p>
+<p>“他们说：“容忍退让是暴露对方蛮横无理的最好办法。”</p>
+<p>2021年3月17日 </p>
+<p>“关于武士的坚忍，有很多著名故事。他们必须能忍耐饥饿，这是无须说的小事一段，他们奉命要做到即使饿得要死，也必须装出刚刚吃完饭的样子，并且要用牙签剔牙。俗谚说：“雏禽求食而鸣，武士口含牙签”</p>
+<p>2021年3月17日 </p>
+<p>“在美国，自尊是与提高自己的地位联系在一起的。一成不变的取缔奢侈令是否定我们这个社会的基础的”</p>
+<p>2021年3月17日 </p>
+<p>“我们可以承认，（正如托克维尔那样）这种贵族制度的“真正尊严”正从近代世界中消逝，并且相信，另一种更优异的尊严正在取而代之。日本无疑也将如此。但在今天，日本只能在它自身的基础上重建其自尊，而不是在我们的基础上重建。而且，它只能用它自己的方式来纯化自身。”</p>
+<p>2021年3月17日 </p>
+<p>“因而不能当面过多地说别人专业上的失误，这既是一般礼节，也是一种明智”</p>
+<p>2021年3月17日 </p>
+<p>“这种敏感性在与人竞争而失败时尤为显著。比如，就业时别人被录用了，或者本人在竞争考试中落选了。失败者就会因失败而“蒙羞”。这种羞耻感有时会成为发奋的强烈动力，但更多的则变成危险的沮丧。他或者丧失自信心，忧郁不振，或者怒发冲冠，或者兼而有之”</p>
+<p>2021年3月17日 </p>
+<p>“对美国人来说特别重要的是，应当认识到：竞争在日本不会产生如同在美国的那种社会上可取的效果。”</p>
+<p>2021年3月17日 </p>
+<p>“当他们用自己的成绩来衡量自己的进步时，他们干得最好，如果与别人对照测试，就不是这样”</p>
+<p>2021年3月17日 </p>
+<p>“他们说，如果一个项目采用竞争的方法，被测试者的思想就会集中于担心失败，因而工作受到损失。他们对竞争对手异常敏感，仿佛是对自己的一种侵犯，因而注意力转到与侵犯者的关系上，而不是专心从事工作。③”</p>
+<p>2021年3月17日 </p>
+<p>“这种尽量减少直接竞争的做法，贯穿于日本人的全部生活”</p>
+<p>2021年3月17日 </p>
+<p>“日本人避免因失败而引起的耻辱。虽然他们强调有义务在受辱时要洗刷污名，但在实际生活中，这种义务使他们在处理事情时尽可能不致感到受辱。”</p>
+<p>2021年3月17日 </p>
+<p>“新渡户稻造”</p>
+<p>2021年3月17日 </p>
+<p>“日本历史故事中这两个主题：一个是有错误者向正确者进行报复；另一个是凡受辱必报复，即使对方是自己的主君。”</p>
+<p>2021年3月17日 </p>
+<p>“日本和俄国都是喜欢在小说中描写厌倦的民族，这和美国形成鲜明的对照。美国小说不大写这种题材。美国小说把书中人物的不幸归咎于性格缺陷，或残酷社会的虐待，而很少描写单纯的厌烦”</p>
+<p>2021年3月17日 </p>
+<p>“美国小说描写一个人与环境不协调总有一个原因，作者总是让读者从道义上责备主人公的性格缺陷或社会秩序中存在的弊端。日本也有无产者小说，谴责城市中可悲的经济状况以及渔船上的可怖事件。但是，正如一位作家说的，日本的人物小说所暴露的是这样一种社会，在那个社会里，人们情绪爆发时就像有毒的气体在飘荡。”</p>
+<p>2021年3月17日 </p>
+<p>“古代英雄惯于向敌人进行攻击，他们则把这种攻击转而向内。在他们看来，他们的忧郁似乎没有明确的原因。虽然也不无找些事件当作原因，但这些事件留给人们的印象则至多不过是一种象征。”</p>
+<p>2021年3月17日 </p>
+<p>“这种情绪之所以在这个阶层广泛蔓延，有充分的社会学原因。这是因为，知识分子过剩，他们在等级制中的地位很不稳定，只有极少数人能够满足其雄心壮志”</p>
+<p>2021年3月17日 </p>
+<p>“日本知识分子常把他们的抑郁归因于西方化造成的混乱，但这种说法并不对路”</p>
+<p>2021年3月17日 </p>
+<p>“这个民族确实丝毫未变。他们是以日本方式作出反应的。在顽强努力与消磨时光极端消沉之间，情绪摇摆不定，这对他们来说是很自然的”</p>
+<p>2021年3月18日 </p>
+<p>“武士道曾经是国家主义者和军国主义者的口号，随着这些领导人的信誉扫地，武士道的概念也正在受到怀疑。”</p>
+<p>2021年3月18日 </p>
+<p>“在日本人看来，只要在自己那个圈子里受到尊敬就是充分的回报，而“不懂义理者”仍然是受其同伴藐视和厌恶的“可悲者”。”</p>
+<p>2021年3月18日 </p>
+<p>“Nitobe, Inazo, The Soul of Japan（新渡户稻造：《武士道：日本的灵魂》），1900年，第83页。新渡户稻造（1862—1933）：日本教育家、农学家、政治家”</p>
+<p>2021年3月18日 </p>
+<p>“日本的道德准则极端要求回报义务和自我约束，似乎坚决要把私欲谴责为罪恶并要求从内心根除。古典佛教的教义就是这样。但日本的道德准则对感官享乐十分宽容，这就更加令人惊异。”</p>
+<p>2021年3月18日 </p>
+<p>“日本人并不谴责满足私欲。他们不是清教徒。他们认为肉体的享乐是件好事，是值得培养的。他们追求享乐，尊重享乐，但是，享乐必须恰如其分，不能妨碍人生重大事务。”</p>
+<p>2021年3月18日 </p>
+<p>“日本人一方面培养肉体享乐，另一方面又规定不能把享乐当做严肃的生活方式而纵情沉溺。”</p>
+<p>2021年3月18日 </p>
+<p>“恰如酷嗜热水澡，视为一大享乐一样，他们也重视“锻炼”，其传统包括最严厉的冷水浴。这种习惯往往被称作“寒稽古”（冬炼）或称“水垢离”，至今仍很盛行，但已不是老传统方式。”</p>
+<p>2021年3月18日 </p>
+<p>“睡眠也是“自成一案，与任何所知生死之事无关”。”</p>
+<p>2021年3月18日 </p>
+<p>“他们认为，像其他“人情”一样，只要把“性”放在人生的低微位置上就行。“人情”没有什么罪恶，因而对性的享受没有必要讲伦理道德”</p>
+<p>2021年3月18日 </p>
+<p>“他们把属于妻子的范围和属于性享乐的范围划得泾渭分明，两个范围都公开、坦率，而不是像美国生活中那样，一个可以公之于世，另一个则只能避人耳目。”</p>
+<p>2021年3月18日 </p>
+<p>“正像一位现代日本人在某杂志中说的：“在我们国家里，结婚的真正目的是生儿育女，传宗接代，其他任何目的，只能歪曲结婚的真实含义。”</p>
+<p>2021年3月18日 </p>
+<p>“他们丝毫不觉得自淫是罪恶而认为是一种享乐，只须在严谨的生活中把它放在微不足道的地位，就能充分控制”</p>
+<p>2021年3月18日 </p>
+<p>“古板的日本人严格区别饮酒和吃饭。在农村的宴会上，如果谁开始吃饭，就意味着他不再喝酒。他已涉足于另一个“世界”，对这两个“世界”区别得很清楚。在自己家里，他有时也在饭后饮酒，但绝不会一边饮酒一边吃饭，而是先享受一种，再享受另一种。”</p>
+<p>2021年3月18日 </p>
+<p>“日本人的上述“人情”观具有一些重要后果。它从根本上推翻了西方人关于肉体与精神两种力量在人的生活中互争雄长的哲学”</p>
+<p>2021年3月18日 </p>
+<p>“在日本人的哲学中，肉体不是罪恶。享受可能的肉体快乐不是犯罪。精神与肉体不是宇宙中对立的两大势力，这种信条逻辑上导致一个结论，即世界并非善与恶的战场。”</p>
+<p>2021年3月18日 </p>
+<p>“总之，无须欢乐结局，但求唤起对男女主角自我牺牲精神的惋惜和同情。”</p>
+<p>2021年3月18日 </p>
+<p>“道元禅师清规》赴粥饭法中有这样一段话：“俟闻钟磬，合掌揖食，次作五思：一计功之多少，思彼来处不易；二思己德匮乏，不足以受供奉；三思防心远过，以遁世为宗；四思食如良药，为治疗枯骸；五思今受此食，以为成道。”</p>
+<p>2021年3月18日 </p>
+<p>“源氏物语》：日本最早，也是世界最早的长篇小说。作者紫式部（978一约1018）。姓藤原，名不详（或云香子）。女歌人、文学家，后供职皇宫。紫式部是宫中女官名。《源氏物语》写于十一世纪初，以降为臣籍的皇子光源氏为中心，写宫廷贵族生活和一夫多妻制下的女性。54卷。是日本古典文学的代表作。我国有丰子恺中译本。”</p>
+<p>2021年3月18日 </p>
+<p>“日本人的人生观表现在他们的忠、孝、义理、仁、人情等德行规定之中。他们似乎认为，“人的义务的整体”像在地图上划分势力范围一样分成若干领域。”</p>
+<p>2021年3月18日 </p>
+<p>“他们的评论则是围绕主人公陷入“义理与人情”、“忠与孝”、“义理与义务”的矛盾。主人公的失败是因为溺于人情而忽视了“义理”的义务，或者是因为忠孝不能两全。他迫于“义理”而不能遵行正义，迫于义理而牺牲家庭。这些矛盾仍然是具有约束力的两种义务之间的矛盾。两者都是“善”的。”</p>
+<p>2021年3月18日 </p>
+<p>“1930年代，有一位著名的自由主义者曾经在公众面前说，回到日本后非常高兴，理由之一就是与妻子重逢。他为此受到世人的批评。人们认为，他应该说，是因为见到了父母，看到了富士山，以及能为日本的国家使命而献身。妻子是不属于这种层次的。”</p>
+<p>2021年3月18日 </p>
+<p>“这种设想的最权威宣言就是明治天皇于1882年（明治十五年）颁发的《军人敕谕》⑫。这份敕谕连同《教育敕语》⑬才是日本真正的圣典”</p>
+<p>2021年3月18日 </p>
+<p>“宣读之时，神圣庄严，听众毕恭毕敬，鸦雀无声。其尊敬程度犹如对待摩西十诫和旧约五书，每次捧读时从“奉安所”恭恭敬敬取出，听众散去后再恭恭敬敬送入“奉安所”。”</p>
+<p>2021年3月18日 </p>
+<p>“日本的伦理体系不是引进一个“大节”的概念就能轻易简化的。正如他们常常夸称，日本人没有一种现成的普遍适用的道德作为善行的试金石。在大多数文化中，一个人的自尊是以其道德水准，如善良、节俭以及事业上的成就为标准。他们总要提出某些人生目的作为追求的目标，如幸福、对他人的控制力量、自由、社会活动能力等。日本人则遵循着更为特殊的准则，不论是在封建时代还是在《军人敕谕》中，即使谈及“大节”，也只是意味着对等级制上层者的义务要压倒对下层者的义务。他们仍然是特殊对待的。西方人一般认为，所谓“大节”，是对忠诚的忠诚，而不是对某一特定个人或特定目标的忠诚。”</p>
+<p>2021年3月18日 </p>
+<p>“这反映了日本人的信条，即不仅要对行为本身负责，而且还要对行为的后果负责。最后，只有“诚实”的人才能领导别人，有效地运用手腕，而不纠缠于心理冲突。”</p>
+<p>2021年3月18日 </p>
+<p>“不管日本人怎样努力改进，日本的道德体系仍然处于多层次分散状态。道德的原则仍然是这个步骤和那个步骤相互保持平衡，各种行动本身都是善的。他们所建立的伦理体系宛如桥牌。优秀的选手是遵守规则并能在规则范围内获胜。他与低劣选手的区别，在于推理的训练，能够利用足够的知识根据竞赛规程判断其他选手的出牌意味着什么，从而打出自己的牌。用我们的话来说，他是按霍伊尔㉔规则比赛。每出一张牌都必须考虑到无数细微末节。比赛规则规定了一切可能出现的偶然性，记分办法也是预先确定的”</p>
+<p>2021年3月18日 </p>
+<p>“在日语中，“自重再自重”，是最强烈的语气，意思是万分小心，无限谨慎，绝不可轻下结论。它还意味着，必须权衡各种方法和手段，用力不多不少，恰可达到目的。”</p>
+<p>2021年3月18日 </p>
+<p>“所有上述“自重”的含义都符合日本人的人生观，即认为人生应该是小心谨慎地按照“霍伊尔”规则行动的世界”</p>
+<p>2021年3月18日 </p>
+<p>“在人类学对各种文化的研究中，区别以耻为基调的文化和以罪为基调的文化是一项重要工作。提倡建立道德的绝对标准并且依靠它发展人的良心，这种社会可以定义为“罪感文化”。”</p>
+<p>2021年3月18日 </p>
+<p>“但在以耻为主要强制力的地方，有错误的人即使当众认错，甚至向神父忏悔，也不会感到解脱。他反而会感到，只要不良行为没有暴露在社会上，就不必懊丧，坦白忏悔只能是自寻烦恼。因此，耻感文化中没有坦白忏悔的习惯，甚至对上帝忏悔的习惯也没有。他们有祈祷幸福的仪式，却没有祈祷赎罪的仪式。”</p>
+<p>2021年3月18日 </p>
+<p>“真正的耻感文化依靠外部的强制力来做善行。真正的罪感文化则依靠罪恶感在内心的反应来做善行”</p>
+<p>2021年3月18日 </p>
+<p>“现代美国人是如何为良心所苦恼。但是在美国，羞耻感正在逐渐加重其分量，而罪恶感则已不如以前那么敏锐。美国人把这种现象解释为道德的松弛。这种解释虽然也包藏着很多真理，但这是因为我们没有指望羞耻感能对道德承担重任。我们也不把伴随耻辱而出现的强烈的个人恼恨纳入我们道德的基本体系。”</p>
+<p>2021年3月18日 </p>
+<p>“知耻为德行之本。对耻辱敏感就会实践善行的一切准则。“知耻之人”这句话有时译成“有德之人”（Virtuous man），有时译成“重名誉之人”（Man of honour）。耻感在日本伦理中的权威地位与西方伦理中的“纯洁良心”、“笃信上帝”、“回避罪恶”的地位相等”</p>
+<p>2021年3月18日 </p>
+<p>“在他们看来，日本人的特殊问题在于，他们是靠这样一种微妙的安全感长大的，即只要一切都按规矩行事，就会得到别人承认。看到外国人对这类礼节满不在乎，他们就不知如何是好。他们千方百计寻找西方人生活中与日本人类似的细微礼节，找不到时，有的非常愤慨，有的则感到愕然。”</p>
+<p>2021年3月18日 </p>
+<p>“日本人自我修养的概念大致可分为两类，一类是培养能力，另一类则不仅培养能力，而且要求更高。这第二类，我称之为“圆熟”</p>
+<p>2021年3月18日 </p>
+<p>“不惜任何自我修养的代价”（at the price of whatever self-discipline）的意思往往是“不惜任何自我牺牲”（at the price of whatever self-sacrifice），而且有“不惜任何自我克制”之意”</p>
+<p>2021年3月18日 </p>
+<p>“日本人对基督教传教士关于自我牺牲的说教总是特别反对。他们极力主张，有道德的人不应当把为别人服务看做是压抑自己。”</p>
+<p>2021年3月18日 </p>
+<p>“一位法国学者在著作中认为完全是“无视常识”，说最讲究修养的教派——禅宗④是“集严肃的荒谬之大成”。可是，日本人企图通过这种技巧所要达到的目标却绝非不可理解。探讨这个问题有助于我们阐明日本人的精神驾驭术。”</p>
+<p>2021年3月18日 </p>
+<p>“僧问：“怎样才能避免生死轮回？”<br>师答：“谁束缚了你？（亦即谁把你绑在轮回之上？）”</p>
+<p>2021年3月18日 </p>
+<p>“画家、诗人、演说家及武士都用这种训练以求达到“无我”。他们学到的并不是“无限”，而是对有限美的、明晰的、不受干扰的感受；或者说，是学会调整手段与目标，用恰当的努力，不多不少，恰好达到目的。”</p>
+<p>2021年3月18日 </p>
+<p>“任何文化，其道德规范总要代代相传，不仅通过语言，而且通过长者对其子女的态度来传递。局外人如果不研究一国的育儿方式，就很难理解该国生活中的重大问题。”</p>
+<p>2021年3月18日 </p>
+<p>“圆熟：英文原著为“expertness”（熟练、内行）。日译本译作“练达”。”</p>
+<p>2021年3月18日 </p>
+<p>“观我、妨我：原文Observing self, Interfering self。意思是：“正在观察着的我”，也是“正在妨碍着进入无我境界的我”。”</p>
+<p>2021年3月18日 </p>
+<p>“轮回：梵文Samsara的意译。意为“流转”。佛教认为：众生皆以其所作善恶业因，在“六道”（天、人、阿修罗、地狱、饿鬼、畜生）中轮回。”</p>
+<p>2021年3月18日 </p>
+<p>“涅槃：梵文Nirvana的音译。与“寂灭”、“圆寂”、“入灭”同义，是最高境界。“灭”一切烦恼，“圆满”（具备）一切“清净功德”</p>
+<p>2021年3月18日 </p>
+<p>“尼采（Friedrich Nietzsche, 1844-1900）：德国唯心主义哲学家。鼓吹超人哲学。著有《悲剧的诞生》、《扎拉图斯特拉如是说》、《善恶的彼岸》等。”</p>
+<p>2021年3月18日 </p>
+<p>“三乘十二因缘：三乘，佛教宣称，人有三种根器，因此有三种修持途径，并比做“乘”三种车，故名三乘，即声闻乘、缘觉乘、菩萨乘。十二因缘，又称十二缘起，是佛教三世轮回的基本理论，包括无明，行，识，名色，六入，触，受，爱，取，有，生，老死。”</p>
+<p>2021年3月18日 </p>
+<p>“法华经：全称《妙法莲花经》。莲花，喻其清净微妙。谓释迦说法，唯一目的在使众生得到智慧，人人皆能成佛，唯有法华经才是“一乘法”，其他皆引导众生接受“一乘”法”</p>
+<p>2021年3月18日 </p>
+<p>“我们（美国父母）从一开始就教育婴儿，要他们懂得，在这个世界上，他们那些小小的愿望并不是至高无上、都必须满足”</p>
+<p>2021年3月18日 </p>
+<p>“日本的人生曲线与美国的人生曲线正好相反。它是一根很大的浅底U字形曲线，允许婴儿和老人有最大的自由和任性。随着幼儿期的过去，约束逐渐增加，结婚前后个人自由降至最低线。这个最低线贯穿整个壮年期，持续几十年，此后再次逐渐上升。过了六十岁，人又几乎可以像幼儿那样不为羞耻和名誉所烦恼。在美国，我们这种曲线是倒过来的，幼儿教养非常严格，随着孩子日益成长而逐渐放松，待至他找到能够自立的工作、有了自己的家庭，就几乎可以不受别人的任何掣肘”</p>
+<p>2021年3月18日 </p>
+<p>“在战后重建日本的事业中，关怀日本前途的领导者们，对战前日本成年学校和军队中这种侮辱青少年、戏弄青少年的习俗应当给予特别注意。应当充分强调“爱校精神”，以及“老同学关系”，以消除大欺小、高压低的习俗”</p>
+<p>这本书是为了战后分析日本局势而写的，用批判的眼光去看，与当今日本社会的情况可能截然不同。</p>
+<p>2021年3月18日 </p>
+<p>“他们曾经学习中国习俗，继而又吸取西方学说，这就是证明。”</p>
+<p>文化多元性带来的问题，没有自身的传统文化，大杂烩，没有一脉相承的文化底蕴。</p>
+<p>2021年3月18日 </p>
+<p>“自尊（自重）的人，其生活准绳不是明辨“善”、“恶”，而是迎合世人的“期望”，避免让世人“失望”，把自己的个人要求埋葬在群体的“期望”之中。这样的人才是“知耻”</p>
+<p>个人要求埋葬在群体的期望之中，牺牲小我，成全大我。集体主义，泯灭个性。</p>
+<p>2021年3月18日 </p>
+<p>“日本人为他们的生活方式付出了很高的代价。他们自愿放弃了各种最基本的自由。这些自由，美国人视为理所当然，犹如呼吸空气。”</p>
+<p>2021年3月18日 </p>
+<p>“，战败以来，日本人正在追求民主。一旦他们能够率直而无顾虑地恣意行动，他们将会何等狂喜”</p>
+<p>2021年3月18日 </p>
+<p>“菊花完全可以摘除金属线圈，不经人工摆布而照样秀丽多姿。”</p>
+<p>2021年3月18日 </p>
+<p>“在日本，对自我负责的解释远比自由的美国更加严格。在这种意义上，刀不是进攻的象征，而是理想和敢于自我负责者的比喻。”</p>
+<p>菊与刀的真实含义：园艺栽培的菊花摆脱金属丝的束缚，佩刀者要擦去刀身的锈迹，获得精神自由的同时使用自我负责的精神，约束行动，起到平衡作用。<br>美国人对自身文化有着充分的自信，也代表着世界文化的发展方向。</p>
+<p>2021年3月18日 </p>
+<p>“现在日本人已经在西方意义上提出了“放下刀”（投降），但在日本意义上，他们仍将强力关注，保持心中放刀，谨防锈蚀，保持光洁。用他们的道德术语来说，这种刀，乃是在更加自由、和平的世界也能保持其光洁的象征。”</p>
+<p>2021年3月18日 </p>
+<p>“和歌、俳句：和歌：日本古典格律诗的总称。有长歌、短歌。主要是短歌：每首五节、三十一音、按五七五五七为序。长歌则以五七音为一联，反复吟咏（三联以上、多为奇数）。俳句较短歌更短，三节十七音、按五七五为序。”</p>
+<p>2021年3月18日 </p>
+<p>“插花：即花道，源于佛教的供花，传自中国，从寺院流布民间，发展为各种流派。十五世纪池坊专庆创“立花”，池坊流成为最古老、最主要的流派。此后，有未生流、小原流、草月流、宏道流等。”</p>
+<p>2021年3月18日 </p>
+<p>“重光葵代表日本签字投降<br>（1945年9月2日，东京湾密苏里舰）”</p>
+<p>2021年3月18日 </p>
+<p>“我们曾不断争论媾和条件的宽严，但真正的问题并不在于宽严，而在于严如其分，恰足以摧毁传统的、危险的侵略性模式，建立起新的目标。至于选择何种手段则应根据该国国民的性格和传统的社会秩序而定。”</p>
+<p>2021年3月18日 </p>
+<p>“日本这样极易随着情况而改变道德标准的民族”</p>
+<p>2021年3月18日 </p>
+<p>“中国的当前目标是军事化，而其野心得到美国的支持。日本的国家预算中如果不包含军事化目标，它将在不远的将来奠定繁荣的基础，并成为东方贸易中的主角。它的经济将建立在和平利益的基础上，并将提高国民的生活水平”</p>
+<p>笔记摘自: 鲁思·本尼迪克特. “菊与刀(增订版) (汉译世界学术名著丛书)。” Apple Books. </p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%97%A5%E6%9C%AC%E6%96%87%E5%8C%96/">日本文化</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/17/%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8%E5%BB%BA%E8%AE%BE%E6%8C%87%E5%8D%97/">
+                        <span class="hidden-mobile">企业安全建设指南</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
