@@ -1,42 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Git搭建本地远程仓库</title>
-    <url>/2021/09/15/Git-2101-Git%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<h1 id="Git学习"><a href="#Git学习" class="headerlink" title="Git学习"></a>Git学习</h1><h2 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h2><h2 id="git配置本地远程仓库"><a href="#git配置本地远程仓库" class="headerlink" title="git配置本地远程仓库"></a>git配置本地远程仓库</h2><p>在本地的移动硬盘中创建git远程仓库，将电脑中的数据同步到git仓库中。</p>
-<h3 id="创建远程仓库"><a href="#创建远程仓库" class="headerlink" title="创建远程仓库"></a>创建远程仓库</h3><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd /Volumes/MacOS/<br>mkdir workSpace<br>cd workSpace<br>git init<br></code></pre></div></td></tr></table></figure>
-
-<h3 id="关联远程仓库"><a href="#关联远程仓库" class="headerlink" title="关联远程仓库"></a>关联远程仓库</h3><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd &quot;实际工作目录&quot;<br>git init   #初始化git目录<br>git add .  #添加修改至临时缓存区<br>git commit -m &quot;init&quot;  #提交至本地仓库<br>git remote add origin /Volumes/MacOS/workSpace  #关联远程仓库的位置<br>git push -u origin master #向远程仓库提交<br></code></pre></div></td></tr></table></figure>
-<p>此时会报错</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git push -u origin master<br><br>Counting objects: 4, done.<br>Delta compression using up to 16 threads.<br>Compressing objects: 100% (2/2), done.<br>Writing objects: 100% (4/4), 245 bytes | 0 bytes/s, done.<br>Total 4 (delta 0), reused 0 (delta 0)<br>remote: error: refusing to update checked out branch: refs/heads/master<br>remote: error: By default, updating the current branch in a non-bare repository<br>remote: error: is denied, because it will make the index and work tree inconsistent<br>remote: error: with what you pushed, and will require &#x27;git reset --hard&#x27; to match<br>remote: error: the work tree to HEAD.<br>remote: error: <br>remote: error: You can set &#x27;receive.denyCurrentBranch&#x27; configuration variable to<br>remote: error: &#x27;ignore&#x27; or &#x27;warn&#x27; in the remote repository to allow pushing into<br>remote: error: its current branch; however, this is not recommended unless you<br>remote: error: arranged to update its work tree to match what you pushed in some<br>remote: error: other way.<br>remote: error: <br>remote: error: To squelch this message and still keep the default behaviour, set<br>remote: error: &#x27;receive.denyCurrentBranch&#x27; configuration variable to &#x27;refuse&#x27;.<br>To /home/lu/Temp/git_server/Test/<br> ! [remote rejected] master -&gt; master (branch is currently checked out)<br>error: failed to push some refs to &#x27;/home/lu/Temp/git_server/Test/<br><br></code></pre></div></td></tr></table></figure>
-<p>因为我们的远程仓库也只是一般的仓库而不是裸仓库，如果是裸仓库的话就不会出现这个问题了。<br>根据错误提示，我们可以进行相应的配置：</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git config --global receive.denyCurrentBranch ignore<br></code></pre></div></td></tr></table></figure>
-<p>也可以直接修改配置文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">vim ~/.gitconfig<br><br>在文件中添加以下内容即可<br>[receive]<br>    denyCurrentBranch = ignore<br></code></pre></div></td></tr></table></figure>
-<p>配置完后，再push一次。</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git push -u origin master<br><br>Counting objects: 4, done.<br>Delta compression using up to 16 threads.<br>Compressing objects: 100% (2/2), done.<br>Writing objects: 100% (4/4), 245 bytes | 0 bytes/s, done.<br>Total 4 (delta 0), reused 0 (delta 0)<br>To /home/lu/Temp/git_server/Test/<br> * [new branch]      master -&gt; master<br>Branch master set up to track remote branch master from origin.<br></code></pre></div></td></tr></table></figure>
-
-<p>提交上去了，但是目前远程仓库中还看不到提交的数据<br>git status可以看到，但是没有写到磁盘上</p>
-<h3 id="添加git-hook"><a href="#添加git-hook" class="headerlink" title="添加git hook"></a>添加git hook</h3><p>git hook是一个非常强大的功能，它可以监听我们对仓库的修改，继而触发相应的逻辑命令。这里为了完成同事的需求，只说说post-update，就是提交有代码更新到仓库时需要执行的操作。</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd .git/hooks<br>mv post-update.sample post-update<br>vim post-update<br></code></pre></div></td></tr></table></figure>
-<p>修改内容</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/sh</span><br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash"><span class="hljs-comment"># An example hook script to prepare a packed repository for use over</span></span><br><span class="hljs-meta">#</span><span class="bash"> dumb transports.</span><br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash"><span class="hljs-comment"># To enable this hook, rename this file to &quot;post-update&quot;.</span></span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"><span class="hljs-built_in">exec</span> git update-server-info</span><br>unset GIT_DIR<br>cd ..<br>git checkout -f<br></code></pre></div></td></tr></table></figure>
-
-<h3 id="修改完成"><a href="#修改完成" class="headerlink" title="修改完成"></a>修改完成</h3><p>再次push</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">echo &quot;demo&quot; &gt; demo #修改某些文件<br>git add .<br>git commit -m &quot;add demo&quot;<br>git push<br>Counting objects: 3, done.<br>Delta compression using up to 16 threads.<br>Compressing objects: 100% (2/2), done.<br>Writing objects: 100% (3/3), 288 bytes | 0 bytes/s, done.<br>Total 3 (delta 0), reused 0 (delta 0)<br>To /home/lu/Temp/git_server/Test/<br>   7be5b2a..9da7116  master -&gt; master<br></code></pre></div></td></tr></table></figure>
-<p>提交之后可查看移动硬盘中的远程仓库，已经上传成功。</p>
-<h2 id="借助百度网盘实现实时同步"><a href="#借助百度网盘实现实时同步" class="headerlink" title="借助百度网盘实现实时同步"></a>借助百度网盘实现实时同步</h2><p>下载百度同步网盘MAC版<br><a href="https://pan.baidu.com/download#pan">https://pan.baidu.com/download#pan</a><br>百度网盘新建文件夹GitSpace，用于存放同步数据。<br>本地新建GitSpace，在此文件夹下创建各项目子文件夹及git仓库。<br>选择同步即可。</p>
-]]></content>
-      <categories>
-        <category>Git学习</category>
-      </categories>
-      <tags>
-        <tag>tips</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>抗生素分类及特点</title>
-    <url>/2021/09/16/BN-2103-%E6%8A%97%E7%94%9F%E7%B4%A0%E5%88%86%E7%B1%BB/</url>
+    <url>/2021/09/16/BN-2101-%E6%8A%97%E7%94%9F%E7%B4%A0%E5%88%86%E7%B1%BB/</url>
     <content><![CDATA[<h1 id="抗生素分类及特点"><a href="#抗生素分类及特点" class="headerlink" title="抗生素分类及特点"></a>抗生素分类及特点</h1><p>临床常用的抗生素包括β- 内酰胺类、氨基糖苷类、大环内酯类、林可霉素类、多肽类、喹诺酮类、磺胺类、抗结核药、抗真菌药及其他抗生素。</p>
 <h2 id="β-内酰胺类"><a href="#β-内酰胺类" class="headerlink" title="β- 内酰胺类"></a>β- 内酰胺类</h2><div class="hljs code-wrapper"><pre><code>此类属于繁殖期杀菌剂。其特点是：血药浓度高、抗菌谱广和毒性低。包括青霉素类、头孢菌素类、新型β- 内酰胺类及β- 内酰胺类与β- 内酰胺酶抑制剂组成的复合制剂。
 </code></pre></div>
@@ -108,6 +74,40 @@
       </categories>
       <tags>
         <tag>药物杂记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git搭建本地远程仓库</title>
+    <url>/2021/09/15/Git-2101-Git%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h1 id="Git学习"><a href="#Git学习" class="headerlink" title="Git学习"></a>Git学习</h1><h2 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h2><h2 id="git配置本地远程仓库"><a href="#git配置本地远程仓库" class="headerlink" title="git配置本地远程仓库"></a>git配置本地远程仓库</h2><p>在本地的移动硬盘中创建git远程仓库，将电脑中的数据同步到git仓库中。</p>
+<h3 id="创建远程仓库"><a href="#创建远程仓库" class="headerlink" title="创建远程仓库"></a>创建远程仓库</h3><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd /Volumes/MacOS/<br>mkdir workSpace<br>cd workSpace<br>git init<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="关联远程仓库"><a href="#关联远程仓库" class="headerlink" title="关联远程仓库"></a>关联远程仓库</h3><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd &quot;实际工作目录&quot;<br>git init   #初始化git目录<br>git add .  #添加修改至临时缓存区<br>git commit -m &quot;init&quot;  #提交至本地仓库<br>git remote add origin /Volumes/MacOS/workSpace  #关联远程仓库的位置<br>git push -u origin master #向远程仓库提交<br></code></pre></div></td></tr></table></figure>
+<p>此时会报错</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git push -u origin master<br><br>Counting objects: 4, done.<br>Delta compression using up to 16 threads.<br>Compressing objects: 100% (2/2), done.<br>Writing objects: 100% (4/4), 245 bytes | 0 bytes/s, done.<br>Total 4 (delta 0), reused 0 (delta 0)<br>remote: error: refusing to update checked out branch: refs/heads/master<br>remote: error: By default, updating the current branch in a non-bare repository<br>remote: error: is denied, because it will make the index and work tree inconsistent<br>remote: error: with what you pushed, and will require &#x27;git reset --hard&#x27; to match<br>remote: error: the work tree to HEAD.<br>remote: error: <br>remote: error: You can set &#x27;receive.denyCurrentBranch&#x27; configuration variable to<br>remote: error: &#x27;ignore&#x27; or &#x27;warn&#x27; in the remote repository to allow pushing into<br>remote: error: its current branch; however, this is not recommended unless you<br>remote: error: arranged to update its work tree to match what you pushed in some<br>remote: error: other way.<br>remote: error: <br>remote: error: To squelch this message and still keep the default behaviour, set<br>remote: error: &#x27;receive.denyCurrentBranch&#x27; configuration variable to &#x27;refuse&#x27;.<br>To /home/lu/Temp/git_server/Test/<br> ! [remote rejected] master -&gt; master (branch is currently checked out)<br>error: failed to push some refs to &#x27;/home/lu/Temp/git_server/Test/<br><br></code></pre></div></td></tr></table></figure>
+<p>因为我们的远程仓库也只是一般的仓库而不是裸仓库，如果是裸仓库的话就不会出现这个问题了。<br>根据错误提示，我们可以进行相应的配置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git config --global receive.denyCurrentBranch ignore<br></code></pre></div></td></tr></table></figure>
+<p>也可以直接修改配置文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">vim ~/.gitconfig<br><br>在文件中添加以下内容即可<br>[receive]<br>    denyCurrentBranch = ignore<br></code></pre></div></td></tr></table></figure>
+<p>配置完后，再push一次。</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git push -u origin master<br><br>Counting objects: 4, done.<br>Delta compression using up to 16 threads.<br>Compressing objects: 100% (2/2), done.<br>Writing objects: 100% (4/4), 245 bytes | 0 bytes/s, done.<br>Total 4 (delta 0), reused 0 (delta 0)<br>To /home/lu/Temp/git_server/Test/<br> * [new branch]      master -&gt; master<br>Branch master set up to track remote branch master from origin.<br></code></pre></div></td></tr></table></figure>
+
+<p>提交上去了，但是目前远程仓库中还看不到提交的数据<br>git status可以看到，但是没有写到磁盘上</p>
+<h3 id="添加git-hook"><a href="#添加git-hook" class="headerlink" title="添加git hook"></a>添加git hook</h3><p>git hook是一个非常强大的功能，它可以监听我们对仓库的修改，继而触发相应的逻辑命令。这里为了完成同事的需求，只说说post-update，就是提交有代码更新到仓库时需要执行的操作。</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd .git/hooks<br>mv post-update.sample post-update<br>vim post-update<br></code></pre></div></td></tr></table></figure>
+<p>修改内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/sh</span><br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash"><span class="hljs-comment"># An example hook script to prepare a packed repository for use over</span></span><br><span class="hljs-meta">#</span><span class="bash"> dumb transports.</span><br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash"><span class="hljs-comment"># To enable this hook, rename this file to &quot;post-update&quot;.</span></span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"><span class="hljs-built_in">exec</span> git update-server-info</span><br>unset GIT_DIR<br>cd ..<br>git checkout -f<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="修改完成"><a href="#修改完成" class="headerlink" title="修改完成"></a>修改完成</h3><p>再次push</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">echo &quot;demo&quot; &gt; demo #修改某些文件<br>git add .<br>git commit -m &quot;add demo&quot;<br>git push<br>Counting objects: 3, done.<br>Delta compression using up to 16 threads.<br>Compressing objects: 100% (2/2), done.<br>Writing objects: 100% (3/3), 288 bytes | 0 bytes/s, done.<br>Total 3 (delta 0), reused 0 (delta 0)<br>To /home/lu/Temp/git_server/Test/<br>   7be5b2a..9da7116  master -&gt; master<br></code></pre></div></td></tr></table></figure>
+<p>提交之后可查看移动硬盘中的远程仓库，已经上传成功。</p>
+<h2 id="借助百度网盘实现实时同步"><a href="#借助百度网盘实现实时同步" class="headerlink" title="借助百度网盘实现实时同步"></a>借助百度网盘实现实时同步</h2><p>下载百度同步网盘MAC版<br><a href="https://pan.baidu.com/download#pan">https://pan.baidu.com/download#pan</a><br>百度网盘新建文件夹GitSpace，用于存放同步数据。<br>本地新建GitSpace，在此文件夹下创建各项目子文件夹及git仓库。<br>选择同步即可。</p>
+]]></content>
+      <categories>
+        <category>Git学习</category>
+      </categories>
+      <tags>
+        <tag>tips</tag>
       </tags>
   </entry>
   <entry>
@@ -252,9 +252,251 @@
       </tags>
   </entry>
   <entry>
+    <title>白帽子讲Web安全</title>
+    <url>/2021/09/17/IS-2102-%E7%99%BD%E5%B8%BD%E5%AD%90%E8%AE%B2Web%E5%AE%89%E5%85%A8/</url>
+    <content><![CDATA[<p class="note note-danger">持续更新中。。。</p>
+<!--便签
+primary
+secondary
+success
+danger
+warning
+info
+light -->
+
+<p><span class="label label-info">信息安全</span>    <span class="label label-success">web安全</span></p>
+<!--行内标签
+primary default info success warning danger -->
+
+<h1 id="第一篇-世界观安全"><a href="#第一篇-世界观安全" class="headerlink" title="第一篇 世界观安全"></a>第一篇 世界观安全</h1><h2 id="第-1-章-我的安全世界观2"><a href="#第-1-章-我的安全世界观2" class="headerlink" title="第 1 章 我的安全世界观2"></a>第 1 章 我的安全世界观2</h2><h3 id="1-1-Web-安全简史-2"><a href="#1-1-Web-安全简史-2" class="headerlink" title="1.1 Web 安全简史 2"></a>1.1 Web 安全简史 2</h3><ol>
+<li>启蒙时代、黄金时代、黑暗时代</li>
+<li>黑客精神：open、free、share</li>
+</ol>
+<p>1.1.1 中国黑客简史 2</p>
+<p>1.1.2 黑客技术的发展历程3</p>
+<ol>
+<li>2003年冲击波蠕虫病毒，攻击Windows系统的RPC服务，445端口，网络运营商在骨干网络上屏蔽了135和445端口的连接请求。运营商加防火墙对网络的封锁，使得暴露在互联网上的非web服务越来越少，且web技术越来越成熟，最终成为主流。</li>
+<li>1.3 Web 安全的兴起 5</li>
+</ol>
+<h3 id="1-2-黑帽子，白帽子-6"><a href="#1-2-黑帽子，白帽子-6" class="headerlink" title="1.2 黑帽子，白帽子 6"></a>1.2 黑帽子，白帽子 6</h3><ol>
+<li>黑帽子为了完成一次入侵，需要理由各种不同漏洞的组合来达到目的，是在不断的组合问题；而白帽子在设计解决方案时，是不断地分解问题，再对分解后的问题逐个予以解决。</li>
+</ol>
+<h3 id="1-3-返璞归真，揭秘安全的本质7"><a href="#1-3-返璞归真，揭秘安全的本质7" class="headerlink" title="1.3 返璞归真，揭秘安全的本质7"></a>1.3 返璞归真，揭秘安全的本质7</h3><ol>
+<li>安全检查的过程，是划分出具有不同信任级别的区域，成为信任域，两个不同信任域之间的边界，成为信任边界。</li>
+<li>数据从高等级的信任域流向低等级的信任域，是不需要经过安全检查的，反之则需要；</li>
+<li><strong>安全问题的本质就是信任问题，一切安全方案设计的基础，都是建立在信任关系上的</strong></li>
+<li>很少假设极端的前提条件，极端的条件意味着小概率以及高成本，需要根据成本来设计安全方案，将一些可能性较大的条件作为决策的主要依据。</li>
+</ol>
+<h3 id="1-4-破除迷信，没有银弹-9"><a href="#1-4-破除迷信，没有银弹-9" class="headerlink" title="1.4 破除迷信，没有银弹  9"></a>1.4 破除迷信，没有银弹  9</h3><ol>
+<li>解决安全问题的过程中，不可能一劳永逸，也就是说“没有银弹”</li>
+</ol>
+<h3 id="1-5-安全三要素-10"><a href="#1-5-安全三要素-10" class="headerlink" title="1.5 安全三要素    10"></a>1.5 安全三要素    10</h3><ol>
+<li>信任关系被破坏，产生安全问题，通过信任域的划分、信任边界的确定，来发现问题是何处产生的。</li>
+<li>安全三要素（CIA）：机密性（Confidentiality）、完整性（Integrity）、可用性（Available）</li>
+</ol>
+<h3 id="1-6-如何实施安全评估-11"><a href="#1-6-如何实施安全评估-11" class="headerlink" title="1.6 如何实施安全评估     11"></a>1.6 如何实施安全评估     11</h3><ol>
+<li>资产等级划分</li>
+<li>威胁分析</li>
+<li>风险分析</li>
+<li>确认解决方案</li>
+</ol>
+<p>1.6.1 资产等级划分    12</p>
+<p>1.6.2 威胁分析  13</p>
+<p>1.6.3 风险分析  14</p>
+<p>1.6.4 设计安全方案    15</p>
+<h3 id="1-7-白帽子兵法-16"><a href="#1-7-白帽子兵法-16" class="headerlink" title="1.7 白帽子兵法    16"></a>1.7 白帽子兵法    16</h3><p>1.7.1.Secure By Default 原则  16</p>
+<p>1.7.2 纵深防御原则    18</p>
+<p>1.7.3 数据与代码分离原则   19</p>
+<p>1.7.4 不可预测性原则  21</p>
+<p>1.8 小结      22</p>
+<p>（附）谁来为漏洞买单？      23</p>
+<h1 id="第二篇-客户端脚本安全"><a href="#第二篇-客户端脚本安全" class="headerlink" title="第二篇 客户端脚本安全"></a>第二篇 客户端脚本安全</h1><h2 id="第-2-章-浏览器安全-26"><a href="#第-2-章-浏览器安全-26" class="headerlink" title="第 2 章 浏览器安全 26"></a>第 2 章 浏览器安全 26</h2><p>2 1.同源策略     26<br>2 2 浏览器沙箱    30<br>2 3 恶意网址拦截  33<br>2 4 高速发展的浏览器安全   36· Ⅹ ·<br>2 5 小结      39</p>
+<h2 id="第-3-章-跨站脚本攻击（-XSS）-40"><a href="#第-3-章-跨站脚本攻击（-XSS）-40" class="headerlink" title="第 3 章 跨站脚本攻击（ XSS）   40"></a>第 3 章 跨站脚本攻击（ XSS）   40</h2><p>3 1.ⅩSS 简介    40<br>3 2 ⅩSS 攻击进阶  43<br>3 2 1.初探 ⅩSS Payload    43<br>3 2 2 强大的 ⅩSS Payload     46<br>3 2 3 ⅩSS 攻击平台  62<br>3 2 4 终极武器： ⅩSS Worm 64<br>3 2 5 调试 JavaScript  73<br>3 2 6.ⅩSS 构造技巧   76<br>3 2 7 变废为宝： Mission Impossible    82<br>3 2 8 容易被忽视的角落： Flash ⅩSS   85<br>3 2 9 真的高枕无忧吗： JavaScript 开发框架    87<br>3 3 ⅩSS 的防御    89<br>3 3 1.四两拨千斤： HttpOnly  89<br>3 3 2 输入检查  93<br>3 3 3 输出检查  95<br>3 3 4 正确地防御 ⅩSS      99<br>3 3 5 处理富文本     102<br>3 3 6.防御 DOM Based ⅩSS 103<br>3 3 7 换个角度看 ⅩSS 的风险     107<br>3 4 小结    107</p>
+<h2 id="第-4-章-跨站点请求伪造（-CSRF）-109"><a href="#第-4-章-跨站点请求伪造（-CSRF）-109" class="headerlink" title="第 4 章 跨站点请求伪造（ CSRF）    109"></a>第 4 章 跨站点请求伪造（ CSRF）    109</h2><p>4 1.CSRF 简介   109<br>4 2 CSRF 进阶   111<br>4 2 1.浏览器的 Cookie 策略  111<br>4 2 2 P3P 头的副作用     113<br>4 2 3 GET？ POST？   116<br>4 2 4 Flash CSRF 118<br>4 2 5 CSRF Worm    119<br>4 3 CSRF 的防御 120<br>4 3 1.验证码  120<br>4 3 2 Referer Check  120<br>4 3 3 Anti CSRF Token   121<br>4 4 小结    124</p>
+<h2 id="第-5-章-点击劫持（-ClickJacking）-125"><a href="#第-5-章-点击劫持（-ClickJacking）-125" class="headerlink" title="第 5 章 点击劫持（ ClickJacking）     125"></a>第 5 章 点击劫持（ ClickJacking）     125</h2><p>5 1.什么是点击劫持  125· ⅩI ·<br>5 2 Flash 点击劫持    127<br>5 3 图片覆盖攻击      129<br>5 4 拖拽劫持与数据窃取     131<br>5 5 ClickJacking 3 0：触屏劫持  134<br>5 6.防御 ClickJacking    136<br>5 6.1.frame busting   136<br>5 6.2 Ⅹ-Frame-Options    137<br>5 7 小结    138</p>
+<h2 id="第-6-章-HTML-5-安全-139"><a href="#第-6-章-HTML-5-安全-139" class="headerlink" title="第 6.章 HTML 5 安全  139"></a>第 6.章 HTML 5 安全  139</h2><p>6.1.HTML 5 新标签   139<br>6.1.1.新标签的 ⅩSS 139<br>6.1.2 iframe 的 sandbox   140<br>6.1.3 Link Types： noreferrer  141<br>6.1.4 Canvas 的妙用   141<br>6.2 其他安全问题      144<br>6.2 1.Cross-Origin Resource Sharing   144<br>6.2 2 postMessage——跨窗口传递消息    146<br>6.2 3 Web Storage    147<br>6.3 小结    150</p>
+<h1 id="第三篇-服务器端应用安全"><a href="#第三篇-服务器端应用安全" class="headerlink" title="第三篇 服务器端应用安全"></a>第三篇 服务器端应用安全</h1><h2 id="第-7-章-注入攻击-152"><a href="#第-7-章-注入攻击-152" class="headerlink" title="第 7 章 注入攻击   152"></a>第 7 章 注入攻击   152</h2><p>7 1.SQL 注入  152<br>7 1.1.盲注（ Blind Injection）      153<br>7 1.2 Timing Attack  155<br>7 2 数据库攻击技巧  157<br>7 2 1.常见的攻击技巧    157<br>7 2 2 命令执行    158<br>7 2 3 攻击存储过程  164<br>7 2 4 编码问题    165<br>7 2 5 SQL Column Truncation      167<br>7 3 正确地防御 SQL 注入   170<br>7 3 1.使用预编译语句    171<br>7 3 2 使用存储过程  172<br>7 3 3 检查数据类型  172<br>7 3 4 使用安全函数  172<br>7 4 其他注入攻击      173· ⅩII ·<br>7 4 1.ⅩML 注入   173<br>7 4 2 代码注入    174<br>7 4 3 CRLF 注入  176<br>7 5 小结    179</p>
+<h2 id="第-8-章-文件上传漏洞-180"><a href="#第-8-章-文件上传漏洞-180" class="headerlink" title="第 8 章 文件上传漏洞 180"></a>第 8 章 文件上传漏洞 180</h2><p>8 1.文件上传漏洞概述   180<br>8 1.1.从 FCKEditor 文件上传漏洞谈起     181<br>8 1.2 绕过文件上传检查功能      182<br>8 2 功能还是漏洞      183<br>8 2 1.Apache 文件解析问题 184<br>8 2 2 IIS 文件解析问题   185<br>8 2 3 PHP CGI 路径解析问题      187<br>8 2 4 利用上传文件钓鱼     189<br>8 3 设计安全的文件上传功能 190<br>8 4 小结    191</p>
+<h2 id="第-9-章-认证与会话管理-192"><a href="#第-9-章-认证与会话管理-192" class="headerlink" title="第 9 章 认证与会话管理  192"></a>第 9 章 认证与会话管理  192</h2><p>9 1.Who am I？    192<br>9 2 密码的那些事儿  193<br>9 3 多因素认证  195<br>9 4 Session 与认证     196<br>9 5 Session Fixation 攻击     198<br>9 6.Session 保持攻击     199<br>9 7 单点登录（ SSO）    201<br>9 8 小结    203</p>
+<h2 id="第-10-章-访问控制-205"><a href="#第-10-章-访问控制-205" class="headerlink" title="第 10 章 访问控制   205"></a>第 10 章 访问控制   205</h2><p>10 1.What Can I Do？  205<br>10 2 垂直权限管理    208<br>10 3 水平权限管理    211<br>10 4 OAuth 简介  213<br>10 5 小结  219</p>
+<h2 id="第-11-章-加密算法与随机数-220"><a href="#第-11-章-加密算法与随机数-220" class="headerlink" title="第 11.章 加密算法与随机数  220"></a>第 11.章 加密算法与随机数  220</h2><p>11.1.概述  220<br>11.2 Stream Cipher Attack    222<br>11.2 1.Reused Key Attack    222<br>11.2 2 Bit-flipping Attack    228<br>11.2 3 弱随机 IⅤ 问题    230· ⅩIII ·<br>11.3 WEP 破解   232<br>11.4 ECB 模式的缺陷    236<br>11.5 Padding Oracle Attack   239<br>11.6.密钥管理    251<br>11.7 伪随机数问题    253<br>11.7 1.弱伪随机数的麻烦   253<br>11.7 2 时间真的随机吗  256<br>11.7 3 破解伪随机数算法的种子   257<br>11.7 4 使用安全的随机数   265<br>11.8 小结  265<br>（附） Understanding MD5 Length Extension Attack  267</p>
+<h2 id="第-12-章-Web-框架安全-280"><a href="#第-12-章-Web-框架安全-280" class="headerlink" title="第 12 章 Web 框架安全   280"></a>第 12 章 Web 框架安全   280</h2><p>12 1.MⅤC 框架安全  280<br>12 2 模板引擎与 ⅩSS 防御  282<br>12 3 Web 框架与 CSRF 防御   285<br>12 4 HTTP Headers 管理      287<br>12 5 数据持久层与 SQL 注入  288<br>12 6.还能想到什么    289<br>12 7 Web 框架自身安全   289<br>12 7 1.Struts 2 命令执行漏洞  290<br>12 7 2 Struts 2 的问题补丁  291<br>12 7 3 Spring MⅤC 命令执行漏洞     292<br>12 7 4 Django 命令执行漏洞   293<br>12 8 小结  294</p>
+<h2 id="第-13-章-应用层拒绝服务攻击-295"><a href="#第-13-章-应用层拒绝服务攻击-295" class="headerlink" title="第 13 章 应用层拒绝服务攻击  295"></a>第 13 章 应用层拒绝服务攻击  295</h2><p>13 1.DDOS 简介  295<br>13 2 应用层 DDOS    297<br>13 2 1.CC 攻击    297<br>13 2 2 限制请求频率      298<br>13 2 3 道高一尺，魔高一丈  300<br>13 3 验证码的那些事儿   301<br>13 4 防御应用层 DDOS   304<br>13 5 资源耗尽攻击    306<br>13 5 1.Slowloris 攻击     306<br>13 5 2 HTTP POST DOS 309<br>13 5 3 Server Limit DOS 310<br>13 6.一个正则引发的血案： ReDOS      311· ⅩIⅤ ·<br>13 7 小结  315</p>
+<h2 id="第-14-章-PHP-安全-317"><a href="#第-14-章-PHP-安全-317" class="headerlink" title="第 14 章 PHP 安全      317"></a>第 14 章 PHP 安全      317</h2><p>14 1.文件包含漏洞    317<br>14 1.1.本地文件包含      319<br>14 1.2 远程文件包含      323<br>14 1.3 本地文件包含的利用技巧   323<br>14 2 变量覆盖漏洞    331<br>14 2 1.全局变量覆盖      331<br>14 2 2 extract（）变量覆盖     334<br>14 2 3 遍历初始化变量  334<br>14 2 4 import_request_variables 变量覆盖   335<br>14 2 5 parse_str（）变量覆盖  335<br>14 3 代码执行漏洞    336<br>14 3 1.“危险函数”执行代码      336<br>14 3 2 “文件写入”执行代码      343<br>14 3 3 其他执行代码方式   344<br>14 4 定制安全的 PHP 环境  348<br>14 5 小结  352</p>
+<h2 id="第-15-章-Web-Server-配置安全-353"><a href="#第-15-章-Web-Server-配置安全-353" class="headerlink" title="第 15 章 Web Server 配置安全  353"></a>第 15 章 Web Server 配置安全  353</h2><p>15 1.Apache 安全   353<br>15 2 Nginx 安全   354<br>15 3 jBoss 远程命令执行     356<br>15 4 Tomcat 远程命令执行  360<br>15 5 HTTP Parameter Pollution 363<br>15 6.小结  364</p>
+<h1 id="第四篇-互联网公司安全运营"><a href="#第四篇-互联网公司安全运营" class="headerlink" title="第四篇 互联网公司安全运营"></a>第四篇 互联网公司安全运营</h1><h2 id="第-16-章-互联网业务安全-366"><a href="#第-16-章-互联网业务安全-366" class="headerlink" title="第 16.章 互联网业务安全      366"></a>第 16.章 互联网业务安全      366</h2><p>16.1.产品需要什么样的安全   366<br>16.1.1.互联网产品对安全的需求   367<br>16.1.2 什么是好的安全方案  368<br>16.2 业务逻辑安全    370<br>16.2 1.永远改不掉的密码   370<br>16.2 2 谁是大赢家   371<br>16.2 3 瞒天过海   372<br>16.2 4 关于密码取回流程   373<br>16.3 账户是如何被盗的   374· ⅩⅤ ·<br>16.3 1.账户被盗的途径  374<br>16.3 2 分析账户被盗的原因  376<br>16.4 互联网的垃圾    377<br>16.4 1.垃圾的危害   377<br>16.4 2 垃圾处理   379<br>16.5 关于网络钓鱼    380<br>16.5 1.钓鱼网站简介      381<br>16.5 2 邮件钓鱼   383<br>16.5 3 钓鱼网站的防控  385<br>16.5 4 网购流程钓鱼      388<br>16.6.用户隐私保护    393<br>16.6.1.互联网的用户隐私挑战    393<br>16.6.2 如何保护用户隐私   394<br>16.6.3 Do-Not-Track   396<br>16.7 小结  397<br>（附）麻烦的终结者  398</p>
+<h2 id="第-17-章-安全开发流程（-SDL）-402"><a href="#第-17-章-安全开发流程（-SDL）-402" class="headerlink" title="第 17 章 安全开发流程（ SDL）     402"></a>第 17 章 安全开发流程（ SDL）     402</h2><p>17 1.SDL 简介   402<br>17 2 敏捷 SDL   406<br>17 3 SDL 实战经验    407<br>17 4 需求分析与设计阶段   409<br>17 5 开发阶段    415<br>17 5 1.提供安全的函数  415<br>17 5 2 代码安全审计工具   417<br>17 6.测试阶段    418<br>17 7 小结  420</p>
+<h2 id="第-18-章-安全运营-422"><a href="#第-18-章-安全运营-422" class="headerlink" title="第 18 章 安全运营   422"></a>第 18 章 安全运营   422</h2><p>18 1.把安全运营起来    422<br>18 2 漏洞修补流程    423<br>18 3 安全监控    424<br>18 4 入侵检测    425<br>18 5 紧急响应流程    428<br>18 6.小结  430<br>（附）谈谈互联网企业安全的发展方向   431</p>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>信息安全</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>追风筝的人</title>
+    <url>/2021/09/17/BN-2103-%E8%BF%BD%E9%A3%8E%E7%AD%9D%E7%9A%84%E4%BA%BA/</url>
+    <content><![CDATA[<p><span class="label label-success">阿富汗</span></p>
+<h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p>在这本感人至深的小说里面，风筝是象征性的，它既可以是亲情、友情、爱情，也可以是正直、善良、诚实。对阿米尔来说，风筝隐喻他人格中必不可少的部分，只有追到了，他才能成为健全的人，成为他自我期许的阿米尔。</p>
+<p>也许每个人心中都有一个风筝，无论它意味着什么，让我们勇敢地追。<br>2021/8/17 17:11</p>
+<hr>
+<h3 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h3><p>我成为今天的我，是在1975年某个阴云密布的寒冷冬日，那年我十二岁。我清楚地记得当时自己趴在一堵坍塌的泥墙后面，窥视着那条小巷，旁边是结冰的小溪。许多年过去了，人们说陈年旧事可以被埋葬，然而我终于明白这是错的，因为往事会自行爬上来。回首前尘，我意识到在过去二十六年里，自己始终在窥视着那荒芜的小径。<br>2021/8/16 13:47</p>
+<hr>
+<p>晌午的骄阳照在波光粼粼的水面上，数十艘轻舟在和风的吹拂中漂行。我抬起头，望见两只红色的风筝，带着长长的蓝色尾巴，在天空中冉冉升起。它们舞动着，飞越公园西边的树林，飞越风车，并排飘浮着，如同一双眼睛俯视着旧金山，这个我现在当成家园的城市。<br>2021/8/16 13:48</p>
+<hr>
+<h3 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h3><p>那条通向两扇锻铁大门的红砖车道两旁植满白杨。<br>2021/8/16 13:51</p>
+<hr>
+<p>爸爸亲手在伊斯法罕(1)选购了精美的马赛克瓷砖，铺满四个浴室的地面，还从加尔各答(2)买来金丝织成的挂毯，用于装饰墙壁，拱形的天花板上挂着水晶吊灯。<br>2021/8/16 13:52</p>
+<hr>
+<p>每当日落西山，玩了一天的哈桑和我就分开了。我穿过那片蔷薇，回到爸爸的广厦去；哈桑则回到他的寒庐，他在那儿出世，在那儿度过一生。我记得它狭小而干净，点着两盏煤油灯，光线昏暗。屋里两端各摆着一床褥子，一张破旧的赫拉特(4)出产的地毯四边磨损，摆在中间。屋角还有一把三脚凳，一张木头桌子，哈桑就在那上面画画。此外四壁萧然，仅有一幅挂毯，用珠子缀着“Allah-u-akbar”（真主伟大）的字样。那是爸爸某次去麦什德(5)旅行时给阿里买的。<br>2021/8/16 14:00</p>
+<hr>
+<p>跟阿里一样，她也是什叶派穆斯林(6)，也是哈扎拉(7)族人。<br>2021/8/16 14:02</p>
+<hr>
+<p>书中认为，普什图人压迫哈扎拉人的原因，部分是由于前者是逊尼派穆斯林，而后者是什叶派。<br>2021/8/16 14:05</p>
+<hr>
+<p>伊斯兰教分为逊尼（Sunni）和什叶（Shi’a）两大派系。两派的分别主要在于对于穆罕默德继承人的合法性的承认上。按什叶派的观点，只有阿里及其直系后裔才是合法的继承人，而逊尼派承认艾布·伯克尔、欧麦尔、奥斯曼、阿里四大哈里发的合法性。<br>2021/8/16 14:08</p>
+<hr>
+<h3 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h3><p>阿富汗人总喜欢将事物夸大，很不幸，这几乎成了这个民族的特性。<br>2021/8/16 14:09</p>
+<hr>
+<p>如果有人吹嘘说他儿子是医生，很可能是那孩子曾经在高中的生物学测验中考了个及格的分数。<br>2021/8/16 14:09</p>
+<hr>
+<p>城里的官员也抽了油水，他们的“胡子得上点油”。<br>2021/8/16 14:10</p>
+<hr>
+<p>“现在，不管那个毛拉怎么说，罪行只有一种，只有一种。那就是盗窃，其他罪行都是盗窃的变种。你明白吗？”<br>2021/8/16 14:17</p>
+<hr>
+<p>“当你杀害一个人，你偷走一条性命，”爸爸说，“你偷走他妻子身为人妇的权利，夺走他子女的父亲。当你说谎，你偷走别人知道真相的权利。当你诈骗，你偷走公平的权利。你懂吗？”<br>2021/8/16 14:17</p>
+<hr>
+<p>“孩子又不是图画练习册，你不能光顾着要涂上自己喜欢的色彩。”<br>2021/8/16 14:22</p>
+<hr>
+<p>“可是他要走去哪里呢？”爸爸说，“一个不能保护自己的男孩，长大之后什么东西都保护不了。”<br>2021/8/16 14:23</p>
+<hr>
+<h3 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h3><p>哈桑长大后，会跟阿里和多数哈扎拉人一样，自出生之日起，甚至自莎娜芭不情不愿地怀上他那天起，就注定要成为文盲——毕竟，仆人要读书识字干吗呢？<br>2021/8/16 15:18</p>
+<hr>
+<p>给哈桑念故事的时候，碰到某个他无法理解的字眼，我就十分高兴，我会取笑他，嘲弄他的无知。有一次，我给他念纳斯鲁丁毛拉的故事，他让我停下来。“那个词是什么意思？”<br>2021/8/16 15:19</p>
+<p>想起了爷爷买的《古文观止》</p>
+<hr>
+<p>后来我总是对此心怀愧疚。<br>2021/8/16 15:20</p>
+<hr>
+<p>文字是扇秘密的门，钥匙在我手里。<br>2021/8/16 15:23</p>
+<p>民可使由之，不可使知之</p>
+<hr>
+<p>有个男人发现了一个魔法杯，得知如果他对着杯子哭泣，掉进杯里的眼泪会变成珍珠。可尽管一贫如洗，他却是个快乐的家伙，罕得流泪。于是他想方设法，让自己悲伤，以便那些眼泪会变成他的财富。珍珠越积越多，他越来越贪婪。小说的结尾是，那男人坐在一座珠宝山上，手里提着刀，怀中抱着他深爱着的妻子死于非命的尸体，无助地将眼泪滴进魔法杯。<br>2021/8/16 15:24</p>
+<hr>
+<p>“如果让我来问，那男人干吗杀了自己的老婆呢？实际上，为什么他必须感到悲伤才能掉眼泪呢？他不可以只是闻闻洋葱吗？”<br>2021/8/16 15:29</p>
+<p>写作要注意逻辑的严密</p>
+<hr>
+<p>就在同一个夜晚，我学到了写作的目标之一：讽刺；我还学到了写作的陷阱之一：情节破绽。芸芸众生中，惟独哈桑教给我。这个目不识丁、不会写字的哈桑。有个冰冷而阴暗的声音在我耳边响起：他懂得什么，这个哈扎拉文盲？他一辈子只配在厨房里打杂。他胆敢批评我？<br>2021/8/16 15:29</p>
+<hr>
+<h3 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h3><p>在餐厅里，我们挤成一堆，等待太阳升起，没有人意识到过去的生活方式已然告终。我们的生活方式，即使尚未全然终结，那也是苟延残喘。终结，正式的终结是在1978年4月，其时政变发生，接着是1979年12月，俄国坦克在我和哈桑玩耍的街道上耀武扬威，给我的父老乡亲带来死亡，开启了如今仍未过去的、血流成河的时代。<br>2021/8/16 15:30</p>
+<hr>
+<p>1973年7月17日夜里，他们根本就没有对什么东西开枪。翌日清晨，大梦初醒的喀布尔发现君主制已然成为历史。查希尔国王远在意大利，他的堂兄达乌德汗(1)趁他不在，发动了政变，没有多加杀戮，就终结了他四十年来的统治。<br>2021/8/16 15:31</p>
+<hr>
+<h3 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h3><p>这个印度小孩很快会学到的，跟英国人在这个世纪之初以及俄国人在1980年代晚期学到的如出一辙：阿富汗人是独立的民族。阿富汗人尊重风俗，但讨厌规则，斗风筝也是这样。规则很简单：放起你的风筝，割断对手的线，祝你好运。<br>2021/8/16 15:57</p>
+<hr>
+<p>“如果你要求，我会的。”他终于说，眼睛直看着我。我垂下眼光，时至今日，我发现自己很难直视像哈桑这样的人，这种说出的每个字都当真的人。<br>2021/8/16 16:00</p>
+<hr>
+<h3 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h3><p>我对他脑海盘桓的念头常常一无所知，可是我在他面前怎么就像一本打开的书？到学校上学的人是我，会读书写字的人是我，聪明伶俐的也是我。哈桑虽然看不懂一年级的课本，却能看穿我。这让人不安，可是有人永远对你的需求了如指掌，毕竟也叫人宽心。<br>2021/8/17 8:39</p>
+<hr>
+<p>但于我而言，这是惟一的机会，让我可以成为一个被注目而非仅仅被看到、被聆听而非仅仅被听到的人。<br>2021/8/17 8:43</p>
+<hr>
+<p>在阿富汗，拥有任何不是二手的美国货，都是财富的象征。<br>2021/8/17 8:46</p>
+<hr>
+<p>我逃跑的真正原因，是觉得阿塞夫说得对：这个世界没有什么是免费的。为了赢回爸爸，也许哈桑只是必须付出的代价，是我必须宰割的羔羊。这是个公平的代价吗？我还来不及抑止，答案就从意识中冒出来：他只是个哈扎拉人，不是吗？<br>2021/8/17 8:51</p>
+<hr>
+<h3 id="第十章"><a href="#第十章" class="headerlink" title="第十章"></a>第十章</h3><p>在喀布尔，你再不能相信任何人——为了获得悬赏或者因为受到威胁，人们彼此告密：邻居告发邻居，儿童揭发父母，兄弟陷害兄弟，仆人背叛主人，朋友出卖朋友。<br>2021/8/17 9:22</p>
+<hr>
+<p>甚至在吃晚饭的桌子上，在自家的屋子里，人们说话也得深思熟虑——教室里面也有这样的人，他们教小孩监视父母，该监听些什么，该向谁告发。<br>2021/8/17 9:23</p>
+<hr>
+<p>爸爸说，他在跟卡林说话，但眼睛直望着那个俄国兵，“你问他的羞耻到哪里去了。”</p>
+<p>他们交谈。“他说这是战争。战争无所谓羞耻。”</p>
+<p>“跟他说他错了。战争不会使高尚的情操消失，人们甚至比和平时期更需要它。”</p>
+<p>你每次都得充好汉不可吗？我想，心怦怦跳。你就不能忍哪怕一次吗？但我知道他不会——忍气吞声不是他的本性。问题是，他的本性正要送我们上西天。</p>
+<p>俄国兵对卡林说了什么，嘴角露出一丝邪笑。“老爷，”卡林说，“这些俄国佬跟我们不同，他们不懂得尊重、荣誉是什么。”<br>2021/8/17 9:26</p>
+<hr>
+<p>“告诉他，我就算中了一千颗子弹，也不会让这龌龊下流的事情发生。”爸爸说。<br>2021/8/17 9:29</p>
+<p>刚毅正直的爸爸</p>
+<hr>
+<p>爸爸重重哼了一声，伸伸他的双腿。“能够救我们的是八个气缸和一个好的化油器。”这句话让其他人说不出话来，再也不提真主的事。<br>2021/8/17 9:31</p>
+<hr>
+<p>我记得爸爸爬到一半，从梯子一跃而下，从口袋里掏出烟盒。他把盒子清空，从土路中央抓起一把灰泥。他亲吻泥土，把它放进盒子，把盒子放进胸前的口袋，贴着他的心。<br>2021/8/17 9:32</p>
+<hr>
+<p>地<br>2021/8/17 9:33</p>
+<hr>
+<p>下室已经够暗了，油罐更是不见天日。我右看，左看，上看，下看，伸手在眼前挥动，可是什么也见不到。我眨眼，再眨眼，不见五指。空气不对劲，它太厚重了，几乎是固态的。空气不应该是固态的。我很想伸出手，把空气捏成碎片，把它们塞进我的气管。还有汽油的味道，油气刺痛我的眼睛，好像有人拉开我的眼皮，拿个柠檬在上面摩擦。每次呼吸都让我的鼻子火辣辣的。我会死在这样的地方，我想。尖叫就要来了，来了，来了……</p>
+<p>接着出现了小小的神迹。爸爸卷起我的衣袖，有个东西在黑暗中发出绿光。光芒！爸爸送的手表。我的眼睛盯着那萤绿的指针。我害怕会失去它们，我不敢眨眼。<br>2021/8/17 9:33</p>
+<hr>
+<p>我把眼光转回我们的行李箱，它们让我替爸爸感到难过。在他打造、谋划、奋斗、烦恼、梦想了一切之后，他的生命只剩下这么点东西：一个不争气的儿子和两个手提箱。<br>2021/8/17 9:40</p>
+<hr>
+<h3 id="第十一章"><a href="#第十一章" class="headerlink" title="第十一章"></a>第十一章</h3><p>爸爸会利用步行的机会，长篇大论对我灌输他的政治观点。“这个世界上只有三个真正的男人，阿米尔，”他说，他伸出手指数着，“美国这个鲁莽的救世主，英国，还有以色列。剩下那些……”通常他会挥挥手，发出不屑的声音，“他们都像是饶舌的老太婆。”<br>2021/8/17 9:41</p>
+<hr>
+<p>但交通的浓雾刺痛他的眼睛，汽车的声响害他头痛，还有，花粉也让他咳嗽。水果永远不够甜，水永远不够干净，所有的树林和原野到哪里去了？开头两年，我试着让爸爸参加英语培训班的课程，提高他那口破英语，但他对此不屑一顾。“也许我会把‘cat’拼出来，然后老师会奖给我一颗闪闪发光的星星，那么我就可以跑回家，拿着它向你炫耀了。”他会这么咕哝。<br>2021/8/17 9:52</p>
+<hr>
+<p>对我来说，美国是个埋葬往事的地方。</p>
+<p>对爸爸来说，这是个哀悼过去的地方。<br>2021/8/17 9:55</p>
+<hr>
+<p>她是个很胖的黑人妇女，眼睛明亮，笑起来露出两个酒窝。有一回她跟我说她在教堂唱歌，我相信——她的声音让我想起热牛奶和蜂蜜。<br>2021/8/17 9:58</p>
+<hr>
+<p>就是这样，爸爸结束了在收银台用食物券支付的屈辱日子，也消除了他最担心的事情之一：被阿富汗人看到他用救济金买食物。爸爸走出福利办公室时，好像大病初愈。<br>2021/8/17 9:59</p>
+<hr>
+<p>早在俄国佬的军队入侵阿富汗之前，早在乡村被烧焚、学校被毁坏之前，早在地雷像死亡的种子那样遍布、儿童被草草掩埋之前，对我来说，喀布尔就已成了一座鬼魂之城，一座兔唇的鬼魂萦绕之城。<br>2021/8/17 10:10</p>
+<hr>
+<h3 id="第十二章"><a href="#第十二章" class="headerlink" title="第十二章"></a>第十二章</h3><p>稍大一些之后，我从诗书中读到，雅尔达是星光黯淡的夜晚，恋人彻夜难眠，忍受着无边黑暗，等待太阳升起，带来他们的爱人。遇到索拉雅之后那个星期，对我来说，每个夜晚都是雅尔达。<br>2021/8/17 11:13</p>
+<hr>
+<p>有时将军到其他过道去跟人攀交情，留她一人看守摊位，我会走过去，假装不认识她，可是心里想认识她想得要死。有时陪着她的还有个矮胖的中年妇女，染红发，肤色苍白。我暗下决心，在夏天结束之前一定要跟她搭讪，但学校开学了，叶子变红、变黄、掉落，冬天的雨水纷纷洒洒，折磨爸爸的手腕，树枝上吐出新芽，而我依然没有勇气、没有胆量，甚至不敢直望她的眼睛。<br>2021/8/17 11:16</p>
+<hr>
+<h3 id="第十五章"><a href="#第十五章" class="headerlink" title="第十五章"></a>第十五章</h3><p>“房间里的大象”<br>2021/8/17 14:00</p>
+<hr>
+<p>“我知道美国给你灌输了乐观的性子，这也是她了不起的地方。那非常好。我们是忧郁的民族，我们阿富汗人，对吧？我们总是陷在悲伤和自恋中。我们在失败、灾难面前屈服，将这些当成生活的实质，甚至视为必须。我们总是说，生活会继续的。但我在这里，没有向命运投降，我看过几个很好的大夫，他们给的答案都一样。我信任他们，相信他们。像这样的事情，是真主的旨意。”<br>2021/8/17 13:58</p>
+<hr>
+<h3 id="第十七章"><a href="#第十七章" class="headerlink" title="第十七章"></a>第十七章</h3><p>街头巷尾已经满是饥肠辘辘的孤儿，每天我都会感谢安拉，让我还活着，不是因为我怕死，而是为了我的妻子仍有丈夫，我的儿子不致成为孤儿。<br>2021/8/17 14:25</p>
+<hr>
+<h3 id="第十九章"><a href="#第十九章" class="headerlink" title="第十九章"></a>第十九章</h3><p>一副黑色假胡子，长及胸膛。表示对伊斯兰教——至少是塔<br>2021/8/17 14:39</p>
+<hr>
+<p>利班眼中的伊斯兰教——的友好<br>2021/8/17 14:39</p>
+<hr>
+<p>他指着一个衣裳褴褛的老人，背着装满柴草的麻袋，在泥土路上跋涉前进。“那才是真正的阿富汗人，老爷，那才是我认识的阿富汗人。你？在这里，你一直无非是个过客而已，只是你自己不知道罢了。”<br>2021/8/17 14:41</p>
+<hr>
+<h3 id="第二十章"><a href="#第二十章" class="headerlink" title="第二十章"></a>第二十章</h3><p>他用那只残废的手熟练地把着方向盘，指着路边座座泥屋组成的村落，说多年以前，他就认得那里的村民，他们中多数不是死了，就是聚集在巴基斯坦的难民营。“而有时候死掉的那些更幸运一些。”他说。<br>2021/8/17 14:51</p>
+<hr>
+<p>几乎见不到有任何成年男子在他们身边——战争把父亲变成阿富汗的稀缺物品。<br>2021/8/17 14:53</p>
+<hr>
+<p>“那些树呢？”我说。</p>
+<p>“冬天的时候被人们砍成柴火了。”法里德说，“俄国佬也砍了不少。”</p>
+<p>“为什么？”</p>
+<p>“树上经常躲着狙击手。”</p>
+<p>一阵悲哀向我袭来。重返喀布尔，犹如去拜访一个多年未遇的老朋友，却发现他潦倒凄戚，发现他无家可归、身无分文。<br>2021/8/17 14:55</p>
+<hr>
+<p>他那患白内障的眼睛闪出光芒：“‘大漠荒草生息不绝，反教春花盛放凋零。’她那么优雅，那么高贵。真是悲剧啊。”<br>2021/8/17 14:57</p>
+<hr>
+<p>“她说,‘我很害怕。’我问,‘为什么？’她说,‘因为我深深地感到快乐，拉索尔博士，快乐成这样，真叫人害怕。’我问她为什么，她说,‘他们只有准备要剥夺你某种东西的时候，才会让你这么快乐。’我说,‘快别胡说。这种想法太蠢了。’”<br>2021/8/17 14:58</p>
+<hr>
+<h3 id="第二十一章"><a href="#第二十一章" class="headerlink" title="第二十一章"></a>第二十一章</h3><p>“他要是被抓住，他们会用鞭子打得他父亲从坟里醒过来。”法里德低声说。<br>2021/8/17 15:17</p>
+<hr>
+<h3 id="第二十三章"><a href="#第二十三章" class="headerlink" title="第二十三章"></a>第二十三章</h3><p>没有良心、没有美德的人不会痛苦<br>2021/8/17 15:41</p>
+<hr>
+<h3 id="第二十五章"><a href="#第二十五章" class="headerlink" title="第二十五章"></a>第二十五章</h3><p>但我会迎接它，张开双臂。因为每逢春天到来，它总是每次融化一片雪花；而也许我刚刚看到的，正是第一片雪花的融化。<br>2021/8/17 17:09</p>
+<hr>
+<p>我追。一个成年人在一群尖叫的孩子中奔跑。但我不在乎。我追，风拂过我的脸庞，我唇上挂着一个像潘杰希尔峡谷那样大大的微笑。<br>2021/8/17 17:09</p>
+<hr>
+<h3 id="译后记"><a href="#译后记" class="headerlink" title="译后记"></a>译后记</h3><p>原书有个别不合国情的地方，译者酌情在措辞上加以改动，意思仍一概如旧。另外，原书有两处前后矛盾的小漏洞，译者自行更正，特此说明。<br>2021/8/17 17:10</p>
+<hr>
+<p>翻译如演出，殚精竭虑之际，浸淫可比演员入戏。此刻重新翻看译稿，感慨良多。身为人子，我庆幸时至今日，父母仍以正直、善良、诚实、勇敢等品质教育我，虽然我时常有负他们所望；身为人父，我希望李贲思健康成长，从生活中获得勇气，能够见义勇为，当仁不让，成为正直的人。<br>2021/8/17 17:11</p>
+<hr>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>民族文化</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>菊与刀</title>
-    <url>/2021/09/17/2103%20%E8%8F%8A%E4%B8%8E%E5%88%80/</url>
-    <content><![CDATA[<h2 id="菊与刀"><a href="#菊与刀" class="headerlink" title="菊与刀"></a>菊与刀</h2><p>[美] 鲁思·本尼迪克特</p>
+    <url>/2021/09/17/BN-2102-%20%E8%8F%8A%E4%B8%8E%E5%88%80/</url>
+    <content><![CDATA[<p><span class="label label-success">日本</span></p>
+<h2 id="菊与刀"><a href="#菊与刀" class="headerlink" title="菊与刀"></a>菊与刀</h2><p>[美] 鲁思·本尼迪克特</p>
 <p>2021年3月15日 </p>
 <p>“对德国，政策很明确，即武装占领，直接管制。对日本，当时有两大问题需要研究：第一，日本政府会不会投降？盟军是否要进攻日本本土而采用对付德国的办法？第二，假若日本投降，美国是否应当利用日本政府机构以至保存天皇？”</p>
 <p>2021年3月15日 </p>
@@ -546,12 +788,12 @@
         <category>读书笔记</category>
       </categories>
       <tags>
-        <tag>日本文化</tag>
+        <tag>民族文化</tag>
       </tags>
   </entry>
   <entry>
     <title>企业安全建设指南</title>
-    <url>/2021/09/17/%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8%E5%BB%BA%E8%AE%BE%E6%8C%87%E5%8D%97/</url>
+    <url>/2021/09/17/IS-2101-%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8%E5%BB%BA%E8%AE%BE%E6%8C%87%E5%8D%97/</url>
     <content><![CDATA[<h1 id="企业安全建设指南"><a href="#企业安全建设指南" class="headerlink" title="企业安全建设指南"></a>企业安全建设指南</h1><h2 id="目-录"><a href="#目-录" class="headerlink" title="目　　录"></a>目　　录</h2><h2 id="序一"><a href="#序一" class="headerlink" title="序一"></a>序一</h2><p>安全圈无论是国内外，颇有江湖侠客之风：英雄不问出处，尊重个性，崇尚技术，追求卓越；靠着先天之悟性和后天之勤奋，从业者可以一战成名，受众人尊重甚至追随。<br>或许各家企业起心动念起点不同，但无论是主动谋求长治久安，还是仅仅为形势环境所迫，无一例外都已经将信息安全作为一项重中之重的任务来抓。</p>
 <ol>
 <li>信息安全工作定位：业务永远是其根本和主业，IT不可倒逼公司做投入。</li>
@@ -1420,7 +1662,7 @@
         <category>读书笔记</category>
       </categories>
       <tags>
-        <tag>企业安全</tag>
+        <tag>信息安全</tag>
       </tags>
   </entry>
 </search>

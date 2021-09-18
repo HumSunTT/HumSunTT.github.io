@@ -1,0 +1,644 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Hero&#39;s Wings">
+  <meta name="keywords" content="">
+  
+  <title>追风筝的人 - HumSunTT&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"humsuntt.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>HumSunTT's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg1.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="追风筝的人">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Hero's Wings
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-17 15:47" pubdate>
+        2021年9月17日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      52
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">追风筝的人</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：3 分钟前
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p><span class="label label-success">阿富汗</span></p>
+<h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p>在这本感人至深的小说里面，风筝是象征性的，它既可以是亲情、友情、爱情，也可以是正直、善良、诚实。对阿米尔来说，风筝隐喻他人格中必不可少的部分，只有追到了，他才能成为健全的人，成为他自我期许的阿米尔。</p>
+<p>也许每个人心中都有一个风筝，无论它意味着什么，让我们勇敢地追。<br>2021/8/17 17:11</p>
+<hr>
+<h3 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h3><p>我成为今天的我，是在1975年某个阴云密布的寒冷冬日，那年我十二岁。我清楚地记得当时自己趴在一堵坍塌的泥墙后面，窥视着那条小巷，旁边是结冰的小溪。许多年过去了，人们说陈年旧事可以被埋葬，然而我终于明白这是错的，因为往事会自行爬上来。回首前尘，我意识到在过去二十六年里，自己始终在窥视着那荒芜的小径。<br>2021/8/16 13:47</p>
+<hr>
+<p>晌午的骄阳照在波光粼粼的水面上，数十艘轻舟在和风的吹拂中漂行。我抬起头，望见两只红色的风筝，带着长长的蓝色尾巴，在天空中冉冉升起。它们舞动着，飞越公园西边的树林，飞越风车，并排飘浮着，如同一双眼睛俯视着旧金山，这个我现在当成家园的城市。<br>2021/8/16 13:48</p>
+<hr>
+<h3 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h3><p>那条通向两扇锻铁大门的红砖车道两旁植满白杨。<br>2021/8/16 13:51</p>
+<hr>
+<p>爸爸亲手在伊斯法罕(1)选购了精美的马赛克瓷砖，铺满四个浴室的地面，还从加尔各答(2)买来金丝织成的挂毯，用于装饰墙壁，拱形的天花板上挂着水晶吊灯。<br>2021/8/16 13:52</p>
+<hr>
+<p>每当日落西山，玩了一天的哈桑和我就分开了。我穿过那片蔷薇，回到爸爸的广厦去；哈桑则回到他的寒庐，他在那儿出世，在那儿度过一生。我记得它狭小而干净，点着两盏煤油灯，光线昏暗。屋里两端各摆着一床褥子，一张破旧的赫拉特(4)出产的地毯四边磨损，摆在中间。屋角还有一把三脚凳，一张木头桌子，哈桑就在那上面画画。此外四壁萧然，仅有一幅挂毯，用珠子缀着“Allah-u-akbar”（真主伟大）的字样。那是爸爸某次去麦什德(5)旅行时给阿里买的。<br>2021/8/16 14:00</p>
+<hr>
+<p>跟阿里一样，她也是什叶派穆斯林(6)，也是哈扎拉(7)族人。<br>2021/8/16 14:02</p>
+<hr>
+<p>书中认为，普什图人压迫哈扎拉人的原因，部分是由于前者是逊尼派穆斯林，而后者是什叶派。<br>2021/8/16 14:05</p>
+<hr>
+<p>伊斯兰教分为逊尼（Sunni）和什叶（Shi’a）两大派系。两派的分别主要在于对于穆罕默德继承人的合法性的承认上。按什叶派的观点，只有阿里及其直系后裔才是合法的继承人，而逊尼派承认艾布·伯克尔、欧麦尔、奥斯曼、阿里四大哈里发的合法性。<br>2021/8/16 14:08</p>
+<hr>
+<h3 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h3><p>阿富汗人总喜欢将事物夸大，很不幸，这几乎成了这个民族的特性。<br>2021/8/16 14:09</p>
+<hr>
+<p>如果有人吹嘘说他儿子是医生，很可能是那孩子曾经在高中的生物学测验中考了个及格的分数。<br>2021/8/16 14:09</p>
+<hr>
+<p>城里的官员也抽了油水，他们的“胡子得上点油”。<br>2021/8/16 14:10</p>
+<hr>
+<p>“现在，不管那个毛拉怎么说，罪行只有一种，只有一种。那就是盗窃，其他罪行都是盗窃的变种。你明白吗？”<br>2021/8/16 14:17</p>
+<hr>
+<p>“当你杀害一个人，你偷走一条性命，”爸爸说，“你偷走他妻子身为人妇的权利，夺走他子女的父亲。当你说谎，你偷走别人知道真相的权利。当你诈骗，你偷走公平的权利。你懂吗？”<br>2021/8/16 14:17</p>
+<hr>
+<p>“孩子又不是图画练习册，你不能光顾着要涂上自己喜欢的色彩。”<br>2021/8/16 14:22</p>
+<hr>
+<p>“可是他要走去哪里呢？”爸爸说，“一个不能保护自己的男孩，长大之后什么东西都保护不了。”<br>2021/8/16 14:23</p>
+<hr>
+<h3 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h3><p>哈桑长大后，会跟阿里和多数哈扎拉人一样，自出生之日起，甚至自莎娜芭不情不愿地怀上他那天起，就注定要成为文盲——毕竟，仆人要读书识字干吗呢？<br>2021/8/16 15:18</p>
+<hr>
+<p>给哈桑念故事的时候，碰到某个他无法理解的字眼，我就十分高兴，我会取笑他，嘲弄他的无知。有一次，我给他念纳斯鲁丁毛拉的故事，他让我停下来。“那个词是什么意思？”<br>2021/8/16 15:19</p>
+<p>想起了爷爷买的《古文观止》</p>
+<hr>
+<p>后来我总是对此心怀愧疚。<br>2021/8/16 15:20</p>
+<hr>
+<p>文字是扇秘密的门，钥匙在我手里。<br>2021/8/16 15:23</p>
+<p>民可使由之，不可使知之</p>
+<hr>
+<p>有个男人发现了一个魔法杯，得知如果他对着杯子哭泣，掉进杯里的眼泪会变成珍珠。可尽管一贫如洗，他却是个快乐的家伙，罕得流泪。于是他想方设法，让自己悲伤，以便那些眼泪会变成他的财富。珍珠越积越多，他越来越贪婪。小说的结尾是，那男人坐在一座珠宝山上，手里提着刀，怀中抱着他深爱着的妻子死于非命的尸体，无助地将眼泪滴进魔法杯。<br>2021/8/16 15:24</p>
+<hr>
+<p>“如果让我来问，那男人干吗杀了自己的老婆呢？实际上，为什么他必须感到悲伤才能掉眼泪呢？他不可以只是闻闻洋葱吗？”<br>2021/8/16 15:29</p>
+<p>写作要注意逻辑的严密</p>
+<hr>
+<p>就在同一个夜晚，我学到了写作的目标之一：讽刺；我还学到了写作的陷阱之一：情节破绽。芸芸众生中，惟独哈桑教给我。这个目不识丁、不会写字的哈桑。有个冰冷而阴暗的声音在我耳边响起：他懂得什么，这个哈扎拉文盲？他一辈子只配在厨房里打杂。他胆敢批评我？<br>2021/8/16 15:29</p>
+<hr>
+<h3 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h3><p>在餐厅里，我们挤成一堆，等待太阳升起，没有人意识到过去的生活方式已然告终。我们的生活方式，即使尚未全然终结，那也是苟延残喘。终结，正式的终结是在1978年4月，其时政变发生，接着是1979年12月，俄国坦克在我和哈桑玩耍的街道上耀武扬威，给我的父老乡亲带来死亡，开启了如今仍未过去的、血流成河的时代。<br>2021/8/16 15:30</p>
+<hr>
+<p>1973年7月17日夜里，他们根本就没有对什么东西开枪。翌日清晨，大梦初醒的喀布尔发现君主制已然成为历史。查希尔国王远在意大利，他的堂兄达乌德汗(1)趁他不在，发动了政变，没有多加杀戮，就终结了他四十年来的统治。<br>2021/8/16 15:31</p>
+<hr>
+<h3 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h3><p>这个印度小孩很快会学到的，跟英国人在这个世纪之初以及俄国人在1980年代晚期学到的如出一辙：阿富汗人是独立的民族。阿富汗人尊重风俗，但讨厌规则，斗风筝也是这样。规则很简单：放起你的风筝，割断对手的线，祝你好运。<br>2021/8/16 15:57</p>
+<hr>
+<p>“如果你要求，我会的。”他终于说，眼睛直看着我。我垂下眼光，时至今日，我发现自己很难直视像哈桑这样的人，这种说出的每个字都当真的人。<br>2021/8/16 16:00</p>
+<hr>
+<h3 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h3><p>我对他脑海盘桓的念头常常一无所知，可是我在他面前怎么就像一本打开的书？到学校上学的人是我，会读书写字的人是我，聪明伶俐的也是我。哈桑虽然看不懂一年级的课本，却能看穿我。这让人不安，可是有人永远对你的需求了如指掌，毕竟也叫人宽心。<br>2021/8/17 8:39</p>
+<hr>
+<p>但于我而言，这是惟一的机会，让我可以成为一个被注目而非仅仅被看到、被聆听而非仅仅被听到的人。<br>2021/8/17 8:43</p>
+<hr>
+<p>在阿富汗，拥有任何不是二手的美国货，都是财富的象征。<br>2021/8/17 8:46</p>
+<hr>
+<p>我逃跑的真正原因，是觉得阿塞夫说得对：这个世界没有什么是免费的。为了赢回爸爸，也许哈桑只是必须付出的代价，是我必须宰割的羔羊。这是个公平的代价吗？我还来不及抑止，答案就从意识中冒出来：他只是个哈扎拉人，不是吗？<br>2021/8/17 8:51</p>
+<hr>
+<h3 id="第十章"><a href="#第十章" class="headerlink" title="第十章"></a>第十章</h3><p>在喀布尔，你再不能相信任何人——为了获得悬赏或者因为受到威胁，人们彼此告密：邻居告发邻居，儿童揭发父母，兄弟陷害兄弟，仆人背叛主人，朋友出卖朋友。<br>2021/8/17 9:22</p>
+<hr>
+<p>甚至在吃晚饭的桌子上，在自家的屋子里，人们说话也得深思熟虑——教室里面也有这样的人，他们教小孩监视父母，该监听些什么，该向谁告发。<br>2021/8/17 9:23</p>
+<hr>
+<p>爸爸说，他在跟卡林说话，但眼睛直望着那个俄国兵，“你问他的羞耻到哪里去了。”</p>
+<p>他们交谈。“他说这是战争。战争无所谓羞耻。”</p>
+<p>“跟他说他错了。战争不会使高尚的情操消失，人们甚至比和平时期更需要它。”</p>
+<p>你每次都得充好汉不可吗？我想，心怦怦跳。你就不能忍哪怕一次吗？但我知道他不会——忍气吞声不是他的本性。问题是，他的本性正要送我们上西天。</p>
+<p>俄国兵对卡林说了什么，嘴角露出一丝邪笑。“老爷，”卡林说，“这些俄国佬跟我们不同，他们不懂得尊重、荣誉是什么。”<br>2021/8/17 9:26</p>
+<hr>
+<p>“告诉他，我就算中了一千颗子弹，也不会让这龌龊下流的事情发生。”爸爸说。<br>2021/8/17 9:29</p>
+<p>刚毅正直的爸爸</p>
+<hr>
+<p>爸爸重重哼了一声，伸伸他的双腿。“能够救我们的是八个气缸和一个好的化油器。”这句话让其他人说不出话来，再也不提真主的事。<br>2021/8/17 9:31</p>
+<hr>
+<p>我记得爸爸爬到一半，从梯子一跃而下，从口袋里掏出烟盒。他把盒子清空，从土路中央抓起一把灰泥。他亲吻泥土，把它放进盒子，把盒子放进胸前的口袋，贴着他的心。<br>2021/8/17 9:32</p>
+<hr>
+<p>地<br>2021/8/17 9:33</p>
+<hr>
+<p>下室已经够暗了，油罐更是不见天日。我右看，左看，上看，下看，伸手在眼前挥动，可是什么也见不到。我眨眼，再眨眼，不见五指。空气不对劲，它太厚重了，几乎是固态的。空气不应该是固态的。我很想伸出手，把空气捏成碎片，把它们塞进我的气管。还有汽油的味道，油气刺痛我的眼睛，好像有人拉开我的眼皮，拿个柠檬在上面摩擦。每次呼吸都让我的鼻子火辣辣的。我会死在这样的地方，我想。尖叫就要来了，来了，来了……</p>
+<p>接着出现了小小的神迹。爸爸卷起我的衣袖，有个东西在黑暗中发出绿光。光芒！爸爸送的手表。我的眼睛盯着那萤绿的指针。我害怕会失去它们，我不敢眨眼。<br>2021/8/17 9:33</p>
+<hr>
+<p>我把眼光转回我们的行李箱，它们让我替爸爸感到难过。在他打造、谋划、奋斗、烦恼、梦想了一切之后，他的生命只剩下这么点东西：一个不争气的儿子和两个手提箱。<br>2021/8/17 9:40</p>
+<hr>
+<h3 id="第十一章"><a href="#第十一章" class="headerlink" title="第十一章"></a>第十一章</h3><p>爸爸会利用步行的机会，长篇大论对我灌输他的政治观点。“这个世界上只有三个真正的男人，阿米尔，”他说，他伸出手指数着，“美国这个鲁莽的救世主，英国，还有以色列。剩下那些……”通常他会挥挥手，发出不屑的声音，“他们都像是饶舌的老太婆。”<br>2021/8/17 9:41</p>
+<hr>
+<p>但交通的浓雾刺痛他的眼睛，汽车的声响害他头痛，还有，花粉也让他咳嗽。水果永远不够甜，水永远不够干净，所有的树林和原野到哪里去了？开头两年，我试着让爸爸参加英语培训班的课程，提高他那口破英语，但他对此不屑一顾。“也许我会把‘cat’拼出来，然后老师会奖给我一颗闪闪发光的星星，那么我就可以跑回家，拿着它向你炫耀了。”他会这么咕哝。<br>2021/8/17 9:52</p>
+<hr>
+<p>对我来说，美国是个埋葬往事的地方。</p>
+<p>对爸爸来说，这是个哀悼过去的地方。<br>2021/8/17 9:55</p>
+<hr>
+<p>她是个很胖的黑人妇女，眼睛明亮，笑起来露出两个酒窝。有一回她跟我说她在教堂唱歌，我相信——她的声音让我想起热牛奶和蜂蜜。<br>2021/8/17 9:58</p>
+<hr>
+<p>就是这样，爸爸结束了在收银台用食物券支付的屈辱日子，也消除了他最担心的事情之一：被阿富汗人看到他用救济金买食物。爸爸走出福利办公室时，好像大病初愈。<br>2021/8/17 9:59</p>
+<hr>
+<p>早在俄国佬的军队入侵阿富汗之前，早在乡村被烧焚、学校被毁坏之前，早在地雷像死亡的种子那样遍布、儿童被草草掩埋之前，对我来说，喀布尔就已成了一座鬼魂之城，一座兔唇的鬼魂萦绕之城。<br>2021/8/17 10:10</p>
+<hr>
+<h3 id="第十二章"><a href="#第十二章" class="headerlink" title="第十二章"></a>第十二章</h3><p>稍大一些之后，我从诗书中读到，雅尔达是星光黯淡的夜晚，恋人彻夜难眠，忍受着无边黑暗，等待太阳升起，带来他们的爱人。遇到索拉雅之后那个星期，对我来说，每个夜晚都是雅尔达。<br>2021/8/17 11:13</p>
+<hr>
+<p>有时将军到其他过道去跟人攀交情，留她一人看守摊位，我会走过去，假装不认识她，可是心里想认识她想得要死。有时陪着她的还有个矮胖的中年妇女，染红发，肤色苍白。我暗下决心，在夏天结束之前一定要跟她搭讪，但学校开学了，叶子变红、变黄、掉落，冬天的雨水纷纷洒洒，折磨爸爸的手腕，树枝上吐出新芽，而我依然没有勇气、没有胆量，甚至不敢直望她的眼睛。<br>2021/8/17 11:16</p>
+<hr>
+<h3 id="第十五章"><a href="#第十五章" class="headerlink" title="第十五章"></a>第十五章</h3><p>“房间里的大象”<br>2021/8/17 14:00</p>
+<hr>
+<p>“我知道美国给你灌输了乐观的性子，这也是她了不起的地方。那非常好。我们是忧郁的民族，我们阿富汗人，对吧？我们总是陷在悲伤和自恋中。我们在失败、灾难面前屈服，将这些当成生活的实质，甚至视为必须。我们总是说，生活会继续的。但我在这里，没有向命运投降，我看过几个很好的大夫，他们给的答案都一样。我信任他们，相信他们。像这样的事情，是真主的旨意。”<br>2021/8/17 13:58</p>
+<hr>
+<h3 id="第十七章"><a href="#第十七章" class="headerlink" title="第十七章"></a>第十七章</h3><p>街头巷尾已经满是饥肠辘辘的孤儿，每天我都会感谢安拉，让我还活着，不是因为我怕死，而是为了我的妻子仍有丈夫，我的儿子不致成为孤儿。<br>2021/8/17 14:25</p>
+<hr>
+<h3 id="第十九章"><a href="#第十九章" class="headerlink" title="第十九章"></a>第十九章</h3><p>一副黑色假胡子，长及胸膛。表示对伊斯兰教——至少是塔<br>2021/8/17 14:39</p>
+<hr>
+<p>利班眼中的伊斯兰教——的友好<br>2021/8/17 14:39</p>
+<hr>
+<p>他指着一个衣裳褴褛的老人，背着装满柴草的麻袋，在泥土路上跋涉前进。“那才是真正的阿富汗人，老爷，那才是我认识的阿富汗人。你？在这里，你一直无非是个过客而已，只是你自己不知道罢了。”<br>2021/8/17 14:41</p>
+<hr>
+<h3 id="第二十章"><a href="#第二十章" class="headerlink" title="第二十章"></a>第二十章</h3><p>他用那只残废的手熟练地把着方向盘，指着路边座座泥屋组成的村落，说多年以前，他就认得那里的村民，他们中多数不是死了，就是聚集在巴基斯坦的难民营。“而有时候死掉的那些更幸运一些。”他说。<br>2021/8/17 14:51</p>
+<hr>
+<p>几乎见不到有任何成年男子在他们身边——战争把父亲变成阿富汗的稀缺物品。<br>2021/8/17 14:53</p>
+<hr>
+<p>“那些树呢？”我说。</p>
+<p>“冬天的时候被人们砍成柴火了。”法里德说，“俄国佬也砍了不少。”</p>
+<p>“为什么？”</p>
+<p>“树上经常躲着狙击手。”</p>
+<p>一阵悲哀向我袭来。重返喀布尔，犹如去拜访一个多年未遇的老朋友，却发现他潦倒凄戚，发现他无家可归、身无分文。<br>2021/8/17 14:55</p>
+<hr>
+<p>他那患白内障的眼睛闪出光芒：“‘大漠荒草生息不绝，反教春花盛放凋零。’她那么优雅，那么高贵。真是悲剧啊。”<br>2021/8/17 14:57</p>
+<hr>
+<p>“她说,‘我很害怕。’我问,‘为什么？’她说,‘因为我深深地感到快乐，拉索尔博士，快乐成这样，真叫人害怕。’我问她为什么，她说,‘他们只有准备要剥夺你某种东西的时候，才会让你这么快乐。’我说,‘快别胡说。这种想法太蠢了。’”<br>2021/8/17 14:58</p>
+<hr>
+<h3 id="第二十一章"><a href="#第二十一章" class="headerlink" title="第二十一章"></a>第二十一章</h3><p>“他要是被抓住，他们会用鞭子打得他父亲从坟里醒过来。”法里德低声说。<br>2021/8/17 15:17</p>
+<hr>
+<h3 id="第二十三章"><a href="#第二十三章" class="headerlink" title="第二十三章"></a>第二十三章</h3><p>没有良心、没有美德的人不会痛苦<br>2021/8/17 15:41</p>
+<hr>
+<h3 id="第二十五章"><a href="#第二十五章" class="headerlink" title="第二十五章"></a>第二十五章</h3><p>但我会迎接它，张开双臂。因为每逢春天到来，它总是每次融化一片雪花；而也许我刚刚看到的，正是第一片雪花的融化。<br>2021/8/17 17:09</p>
+<hr>
+<p>我追。一个成年人在一群尖叫的孩子中奔跑。但我不在乎。我追，风拂过我的脸庞，我唇上挂着一个像潘杰希尔峡谷那样大大的微笑。<br>2021/8/17 17:09</p>
+<hr>
+<h3 id="译后记"><a href="#译后记" class="headerlink" title="译后记"></a>译后记</h3><p>原书有个别不合国情的地方，译者酌情在措辞上加以改动，意思仍一概如旧。另外，原书有两处前后矛盾的小漏洞，译者自行更正，特此说明。<br>2021/8/17 17:10</p>
+<hr>
+<p>翻译如演出，殚精竭虑之际，浸淫可比演员入戏。此刻重新翻看译稿，感慨良多。身为人子，我庆幸时至今日，父母仍以正直、善良、诚实、勇敢等品质教育我，虽然我时常有负他们所望；身为人父，我希望李贲思健康成长，从生活中获得勇气，能够见义勇为，当仁不让，成为正直的人。<br>2021/8/17 17:11</p>
+<hr>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%B0%91%E6%97%8F%E6%96%87%E5%8C%96/">民族文化</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/17/BN-2102-%20%E8%8F%8A%E4%B8%8E%E5%88%80/">
+                        <span class="hidden-mobile">菊与刀</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://octodex.github.com/images/jetpacktocat.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
