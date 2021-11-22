@@ -77,124 +77,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Git搭建本地远程仓库</title>
-    <url>/2021/09/15/Git-2101-Git%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<h1 id="Git学习"><a href="#Git学习" class="headerlink" title="Git学习"></a>Git学习</h1><h2 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h2><h2 id="git配置本地远程仓库"><a href="#git配置本地远程仓库" class="headerlink" title="git配置本地远程仓库"></a>git配置本地远程仓库</h2><p>在本地的移动硬盘中创建git远程仓库，将电脑中的数据同步到git仓库中。</p>
-<h3 id="创建远程仓库"><a href="#创建远程仓库" class="headerlink" title="创建远程仓库"></a>创建远程仓库</h3><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd /Volumes/MacOS/<br>mkdir workSpace<br>cd workSpace<br>git init<br></code></pre></div></td></tr></table></figure>
-
-<h3 id="关联远程仓库"><a href="#关联远程仓库" class="headerlink" title="关联远程仓库"></a>关联远程仓库</h3><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd &quot;实际工作目录&quot;<br>git init   #初始化git目录<br>git add .  #添加修改至临时缓存区<br>git commit -m &quot;init&quot;  #提交至本地仓库<br>git remote add origin /Volumes/MacOS/workSpace  #关联远程仓库的位置<br>git push -u origin master #向远程仓库提交<br></code></pre></div></td></tr></table></figure>
-<p>此时会报错</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git push -u origin master<br><br>Counting objects: 4, done.<br>Delta compression using up to 16 threads.<br>Compressing objects: 100% (2/2), done.<br>Writing objects: 100% (4/4), 245 bytes | 0 bytes/s, done.<br>Total 4 (delta 0), reused 0 (delta 0)<br>remote: error: refusing to update checked out branch: refs/heads/master<br>remote: error: By default, updating the current branch in a non-bare repository<br>remote: error: is denied, because it will make the index and work tree inconsistent<br>remote: error: with what you pushed, and will require &#x27;git reset --hard&#x27; to match<br>remote: error: the work tree to HEAD.<br>remote: error: <br>remote: error: You can set &#x27;receive.denyCurrentBranch&#x27; configuration variable to<br>remote: error: &#x27;ignore&#x27; or &#x27;warn&#x27; in the remote repository to allow pushing into<br>remote: error: its current branch; however, this is not recommended unless you<br>remote: error: arranged to update its work tree to match what you pushed in some<br>remote: error: other way.<br>remote: error: <br>remote: error: To squelch this message and still keep the default behaviour, set<br>remote: error: &#x27;receive.denyCurrentBranch&#x27; configuration variable to &#x27;refuse&#x27;.<br>To /home/lu/Temp/git_server/Test/<br> ! [remote rejected] master -&gt; master (branch is currently checked out)<br>error: failed to push some refs to &#x27;/home/lu/Temp/git_server/Test/<br><br></code></pre></div></td></tr></table></figure>
-<p>因为我们的远程仓库也只是一般的仓库而不是裸仓库，如果是裸仓库的话就不会出现这个问题了。<br>根据错误提示，我们可以进行相应的配置：</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git config --global receive.denyCurrentBranch ignore<br></code></pre></div></td></tr></table></figure>
-<p>也可以直接修改配置文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">vim ~/.gitconfig<br><br>在文件中添加以下内容即可<br>[receive]<br>    denyCurrentBranch = ignore<br></code></pre></div></td></tr></table></figure>
-<p>配置完后，再push一次。</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git push -u origin master<br><br>Counting objects: 4, done.<br>Delta compression using up to 16 threads.<br>Compressing objects: 100% (2/2), done.<br>Writing objects: 100% (4/4), 245 bytes | 0 bytes/s, done.<br>Total 4 (delta 0), reused 0 (delta 0)<br>To /home/lu/Temp/git_server/Test/<br> * [new branch]      master -&gt; master<br>Branch master set up to track remote branch master from origin.<br></code></pre></div></td></tr></table></figure>
-
-<p>提交上去了，但是目前远程仓库中还看不到提交的数据<br>git status可以看到，但是没有写到磁盘上</p>
-<h3 id="添加git-hook"><a href="#添加git-hook" class="headerlink" title="添加git hook"></a>添加git hook</h3><p>git hook是一个非常强大的功能，它可以监听我们对仓库的修改，继而触发相应的逻辑命令。这里为了完成同事的需求，只说说post-update，就是提交有代码更新到仓库时需要执行的操作。</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd .git/hooks<br>mv post-update.sample post-update<br>vim post-update<br></code></pre></div></td></tr></table></figure>
-<p>修改内容</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/sh</span><br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash"><span class="hljs-comment"># An example hook script to prepare a packed repository for use over</span></span><br><span class="hljs-meta">#</span><span class="bash"> dumb transports.</span><br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash"><span class="hljs-comment"># To enable this hook, rename this file to &quot;post-update&quot;.</span></span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"><span class="hljs-built_in">exec</span> git update-server-info</span><br>unset GIT_DIR<br>cd ..<br>git checkout -f<br></code></pre></div></td></tr></table></figure>
-
-<h3 id="修改完成"><a href="#修改完成" class="headerlink" title="修改完成"></a>修改完成</h3><p>再次push</p>
-<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">echo &quot;demo&quot; &gt; demo #修改某些文件<br>git add .<br>git commit -m &quot;add demo&quot;<br>git push<br>Counting objects: 3, done.<br>Delta compression using up to 16 threads.<br>Compressing objects: 100% (2/2), done.<br>Writing objects: 100% (3/3), 288 bytes | 0 bytes/s, done.<br>Total 3 (delta 0), reused 0 (delta 0)<br>To /home/lu/Temp/git_server/Test/<br>   7be5b2a..9da7116  master -&gt; master<br></code></pre></div></td></tr></table></figure>
-<p>提交之后可查看移动硬盘中的远程仓库，已经上传成功。</p>
-<h2 id="借助百度网盘实现实时同步"><a href="#借助百度网盘实现实时同步" class="headerlink" title="借助百度网盘实现实时同步"></a>借助百度网盘实现实时同步</h2><p>下载百度同步网盘MAC版<br><a href="https://pan.baidu.com/download#pan">https://pan.baidu.com/download#pan</a><br>百度网盘新建文件夹GitSpace，用于存放同步数据。<br>本地新建GitSpace，在此文件夹下创建各项目子文件夹及git仓库。<br>选择同步即可。</p>
-]]></content>
-      <categories>
-        <category>Git学习</category>
-      </categories>
-      <tags>
-        <tag>tips</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>白帽子讲Web安全</title>
-    <url>/2021/09/17/IS-2102-%E7%99%BD%E5%B8%BD%E5%AD%90%E8%AE%B2Web%E5%AE%89%E5%85%A8/</url>
-    <content><![CDATA[<p class="note note-danger">持续更新中。。。</p>
-<!--便签
-primary
-secondary
-success
-danger
-warning
-info
-light -->
-
-<p><span class="label label-info">信息安全</span>    <span class="label label-success">web安全</span></p>
-<!--行内标签
-primary default info success warning danger -->
-
-<h1 id="第一篇-世界观安全"><a href="#第一篇-世界观安全" class="headerlink" title="第一篇 世界观安全"></a>第一篇 世界观安全</h1><h2 id="第-1-章-我的安全世界观2"><a href="#第-1-章-我的安全世界观2" class="headerlink" title="第 1 章 我的安全世界观2"></a>第 1 章 我的安全世界观2</h2><h3 id="1-1-Web-安全简史-2"><a href="#1-1-Web-安全简史-2" class="headerlink" title="1.1 Web 安全简史 2"></a>1.1 Web 安全简史 2</h3><ol>
-<li>启蒙时代、黄金时代、黑暗时代</li>
-<li>黑客精神：open、free、share</li>
-</ol>
-<p>1.1.1 中国黑客简史 2</p>
-<p>1.1.2 黑客技术的发展历程3</p>
-<ol>
-<li>2003年冲击波蠕虫病毒，攻击Windows系统的RPC服务，445端口，网络运营商在骨干网络上屏蔽了135和445端口的连接请求。运营商加防火墙对网络的封锁，使得暴露在互联网上的非web服务越来越少，且web技术越来越成熟，最终成为主流。</li>
-<li>1.3 Web 安全的兴起 5</li>
-</ol>
-<h3 id="1-2-黑帽子，白帽子-6"><a href="#1-2-黑帽子，白帽子-6" class="headerlink" title="1.2 黑帽子，白帽子 6"></a>1.2 黑帽子，白帽子 6</h3><ol>
-<li>黑帽子为了完成一次入侵，需要理由各种不同漏洞的组合来达到目的，是在不断的组合问题；而白帽子在设计解决方案时，是不断地分解问题，再对分解后的问题逐个予以解决。</li>
-</ol>
-<h3 id="1-3-返璞归真，揭秘安全的本质7"><a href="#1-3-返璞归真，揭秘安全的本质7" class="headerlink" title="1.3 返璞归真，揭秘安全的本质7"></a>1.3 返璞归真，揭秘安全的本质7</h3><ol>
-<li>安全检查的过程，是划分出具有不同信任级别的区域，成为信任域，两个不同信任域之间的边界，成为信任边界。</li>
-<li>数据从高等级的信任域流向低等级的信任域，是不需要经过安全检查的，反之则需要；</li>
-<li><strong>安全问题的本质就是信任问题，一切安全方案设计的基础，都是建立在信任关系上的</strong></li>
-<li>很少假设极端的前提条件，极端的条件意味着小概率以及高成本，需要根据成本来设计安全方案，将一些可能性较大的条件作为决策的主要依据。</li>
-</ol>
-<h3 id="1-4-破除迷信，没有银弹-9"><a href="#1-4-破除迷信，没有银弹-9" class="headerlink" title="1.4 破除迷信，没有银弹  9"></a>1.4 破除迷信，没有银弹  9</h3><ol>
-<li>解决安全问题的过程中，不可能一劳永逸，也就是说“没有银弹”</li>
-</ol>
-<h3 id="1-5-安全三要素-10"><a href="#1-5-安全三要素-10" class="headerlink" title="1.5 安全三要素    10"></a>1.5 安全三要素    10</h3><ol>
-<li>信任关系被破坏，产生安全问题，通过信任域的划分、信任边界的确定，来发现问题是何处产生的。</li>
-<li>安全三要素（CIA）：机密性（Confidentiality）、完整性（Integrity）、可用性（Available）</li>
-</ol>
-<h3 id="1-6-如何实施安全评估-11"><a href="#1-6-如何实施安全评估-11" class="headerlink" title="1.6 如何实施安全评估     11"></a>1.6 如何实施安全评估     11</h3><ol>
-<li>资产等级划分</li>
-<li>威胁分析</li>
-<li>风险分析</li>
-<li>确认解决方案</li>
-</ol>
-<p>1.6.1 资产等级划分    12</p>
-<p>1.6.2 威胁分析  13</p>
-<p>1.6.3 风险分析  14</p>
-<p>1.6.4 设计安全方案    15</p>
-<h3 id="1-7-白帽子兵法-16"><a href="#1-7-白帽子兵法-16" class="headerlink" title="1.7 白帽子兵法    16"></a>1.7 白帽子兵法    16</h3><p>1.7.1.Secure By Default 原则  16</p>
-<p>1.7.2 纵深防御原则    18</p>
-<p>1.7.3 数据与代码分离原则   19</p>
-<p>1.7.4 不可预测性原则  21</p>
-<p>1.8 小结      22</p>
-<p>（附）谁来为漏洞买单？      23</p>
-<h1 id="第二篇-客户端脚本安全"><a href="#第二篇-客户端脚本安全" class="headerlink" title="第二篇 客户端脚本安全"></a>第二篇 客户端脚本安全</h1><h2 id="第-2-章-浏览器安全-26"><a href="#第-2-章-浏览器安全-26" class="headerlink" title="第 2 章 浏览器安全 26"></a>第 2 章 浏览器安全 26</h2><p>2 1.同源策略     26<br>2 2 浏览器沙箱    30<br>2 3 恶意网址拦截  33<br>2 4 高速发展的浏览器安全   36· Ⅹ ·<br>2 5 小结      39</p>
-<h2 id="第-3-章-跨站脚本攻击（-XSS）-40"><a href="#第-3-章-跨站脚本攻击（-XSS）-40" class="headerlink" title="第 3 章 跨站脚本攻击（ XSS）   40"></a>第 3 章 跨站脚本攻击（ XSS）   40</h2><p>3 1.ⅩSS 简介    40<br>3 2 ⅩSS 攻击进阶  43<br>3 2 1.初探 ⅩSS Payload    43<br>3 2 2 强大的 ⅩSS Payload     46<br>3 2 3 ⅩSS 攻击平台  62<br>3 2 4 终极武器： ⅩSS Worm 64<br>3 2 5 调试 JavaScript  73<br>3 2 6.ⅩSS 构造技巧   76<br>3 2 7 变废为宝： Mission Impossible    82<br>3 2 8 容易被忽视的角落： Flash ⅩSS   85<br>3 2 9 真的高枕无忧吗： JavaScript 开发框架    87<br>3 3 ⅩSS 的防御    89<br>3 3 1.四两拨千斤： HttpOnly  89<br>3 3 2 输入检查  93<br>3 3 3 输出检查  95<br>3 3 4 正确地防御 ⅩSS      99<br>3 3 5 处理富文本     102<br>3 3 6.防御 DOM Based ⅩSS 103<br>3 3 7 换个角度看 ⅩSS 的风险     107<br>3 4 小结    107</p>
-<h2 id="第-4-章-跨站点请求伪造（-CSRF）-109"><a href="#第-4-章-跨站点请求伪造（-CSRF）-109" class="headerlink" title="第 4 章 跨站点请求伪造（ CSRF）    109"></a>第 4 章 跨站点请求伪造（ CSRF）    109</h2><p>4 1.CSRF 简介   109<br>4 2 CSRF 进阶   111<br>4 2 1.浏览器的 Cookie 策略  111<br>4 2 2 P3P 头的副作用     113<br>4 2 3 GET？ POST？   116<br>4 2 4 Flash CSRF 118<br>4 2 5 CSRF Worm    119<br>4 3 CSRF 的防御 120<br>4 3 1.验证码  120<br>4 3 2 Referer Check  120<br>4 3 3 Anti CSRF Token   121<br>4 4 小结    124</p>
-<h2 id="第-5-章-点击劫持（-ClickJacking）-125"><a href="#第-5-章-点击劫持（-ClickJacking）-125" class="headerlink" title="第 5 章 点击劫持（ ClickJacking）     125"></a>第 5 章 点击劫持（ ClickJacking）     125</h2><p>5 1.什么是点击劫持  125· ⅩI ·<br>5 2 Flash 点击劫持    127<br>5 3 图片覆盖攻击      129<br>5 4 拖拽劫持与数据窃取     131<br>5 5 ClickJacking 3 0：触屏劫持  134<br>5 6.防御 ClickJacking    136<br>5 6.1.frame busting   136<br>5 6.2 Ⅹ-Frame-Options    137<br>5 7 小结    138</p>
-<h2 id="第-6-章-HTML-5-安全-139"><a href="#第-6-章-HTML-5-安全-139" class="headerlink" title="第 6.章 HTML 5 安全  139"></a>第 6.章 HTML 5 安全  139</h2><p>6.1.HTML 5 新标签   139<br>6.1.1.新标签的 ⅩSS 139<br>6.1.2 iframe 的 sandbox   140<br>6.1.3 Link Types： noreferrer  141<br>6.1.4 Canvas 的妙用   141<br>6.2 其他安全问题      144<br>6.2 1.Cross-Origin Resource Sharing   144<br>6.2 2 postMessage——跨窗口传递消息    146<br>6.2 3 Web Storage    147<br>6.3 小结    150</p>
-<h1 id="第三篇-服务器端应用安全"><a href="#第三篇-服务器端应用安全" class="headerlink" title="第三篇 服务器端应用安全"></a>第三篇 服务器端应用安全</h1><h2 id="第-7-章-注入攻击-152"><a href="#第-7-章-注入攻击-152" class="headerlink" title="第 7 章 注入攻击   152"></a>第 7 章 注入攻击   152</h2><p>7 1.SQL 注入  152<br>7 1.1.盲注（ Blind Injection）      153<br>7 1.2 Timing Attack  155<br>7 2 数据库攻击技巧  157<br>7 2 1.常见的攻击技巧    157<br>7 2 2 命令执行    158<br>7 2 3 攻击存储过程  164<br>7 2 4 编码问题    165<br>7 2 5 SQL Column Truncation      167<br>7 3 正确地防御 SQL 注入   170<br>7 3 1.使用预编译语句    171<br>7 3 2 使用存储过程  172<br>7 3 3 检查数据类型  172<br>7 3 4 使用安全函数  172<br>7 4 其他注入攻击      173· ⅩII ·<br>7 4 1.ⅩML 注入   173<br>7 4 2 代码注入    174<br>7 4 3 CRLF 注入  176<br>7 5 小结    179</p>
-<h2 id="第-8-章-文件上传漏洞-180"><a href="#第-8-章-文件上传漏洞-180" class="headerlink" title="第 8 章 文件上传漏洞 180"></a>第 8 章 文件上传漏洞 180</h2><p>8 1.文件上传漏洞概述   180<br>8 1.1.从 FCKEditor 文件上传漏洞谈起     181<br>8 1.2 绕过文件上传检查功能      182<br>8 2 功能还是漏洞      183<br>8 2 1.Apache 文件解析问题 184<br>8 2 2 IIS 文件解析问题   185<br>8 2 3 PHP CGI 路径解析问题      187<br>8 2 4 利用上传文件钓鱼     189<br>8 3 设计安全的文件上传功能 190<br>8 4 小结    191</p>
-<h2 id="第-9-章-认证与会话管理-192"><a href="#第-9-章-认证与会话管理-192" class="headerlink" title="第 9 章 认证与会话管理  192"></a>第 9 章 认证与会话管理  192</h2><p>9 1.Who am I？    192<br>9 2 密码的那些事儿  193<br>9 3 多因素认证  195<br>9 4 Session 与认证     196<br>9 5 Session Fixation 攻击     198<br>9 6.Session 保持攻击     199<br>9 7 单点登录（ SSO）    201<br>9 8 小结    203</p>
-<h2 id="第-10-章-访问控制-205"><a href="#第-10-章-访问控制-205" class="headerlink" title="第 10 章 访问控制   205"></a>第 10 章 访问控制   205</h2><p>10 1.What Can I Do？  205<br>10 2 垂直权限管理    208<br>10 3 水平权限管理    211<br>10 4 OAuth 简介  213<br>10 5 小结  219</p>
-<h2 id="第-11-章-加密算法与随机数-220"><a href="#第-11-章-加密算法与随机数-220" class="headerlink" title="第 11.章 加密算法与随机数  220"></a>第 11.章 加密算法与随机数  220</h2><p>11.1.概述  220<br>11.2 Stream Cipher Attack    222<br>11.2 1.Reused Key Attack    222<br>11.2 2 Bit-flipping Attack    228<br>11.2 3 弱随机 IⅤ 问题    230· ⅩIII ·<br>11.3 WEP 破解   232<br>11.4 ECB 模式的缺陷    236<br>11.5 Padding Oracle Attack   239<br>11.6.密钥管理    251<br>11.7 伪随机数问题    253<br>11.7 1.弱伪随机数的麻烦   253<br>11.7 2 时间真的随机吗  256<br>11.7 3 破解伪随机数算法的种子   257<br>11.7 4 使用安全的随机数   265<br>11.8 小结  265<br>（附） Understanding MD5 Length Extension Attack  267</p>
-<h2 id="第-12-章-Web-框架安全-280"><a href="#第-12-章-Web-框架安全-280" class="headerlink" title="第 12 章 Web 框架安全   280"></a>第 12 章 Web 框架安全   280</h2><p>12 1.MⅤC 框架安全  280<br>12 2 模板引擎与 ⅩSS 防御  282<br>12 3 Web 框架与 CSRF 防御   285<br>12 4 HTTP Headers 管理      287<br>12 5 数据持久层与 SQL 注入  288<br>12 6.还能想到什么    289<br>12 7 Web 框架自身安全   289<br>12 7 1.Struts 2 命令执行漏洞  290<br>12 7 2 Struts 2 的问题补丁  291<br>12 7 3 Spring MⅤC 命令执行漏洞     292<br>12 7 4 Django 命令执行漏洞   293<br>12 8 小结  294</p>
-<h2 id="第-13-章-应用层拒绝服务攻击-295"><a href="#第-13-章-应用层拒绝服务攻击-295" class="headerlink" title="第 13 章 应用层拒绝服务攻击  295"></a>第 13 章 应用层拒绝服务攻击  295</h2><p>13 1.DDOS 简介  295<br>13 2 应用层 DDOS    297<br>13 2 1.CC 攻击    297<br>13 2 2 限制请求频率      298<br>13 2 3 道高一尺，魔高一丈  300<br>13 3 验证码的那些事儿   301<br>13 4 防御应用层 DDOS   304<br>13 5 资源耗尽攻击    306<br>13 5 1.Slowloris 攻击     306<br>13 5 2 HTTP POST DOS 309<br>13 5 3 Server Limit DOS 310<br>13 6.一个正则引发的血案： ReDOS      311· ⅩIⅤ ·<br>13 7 小结  315</p>
-<h2 id="第-14-章-PHP-安全-317"><a href="#第-14-章-PHP-安全-317" class="headerlink" title="第 14 章 PHP 安全      317"></a>第 14 章 PHP 安全      317</h2><p>14 1.文件包含漏洞    317<br>14 1.1.本地文件包含      319<br>14 1.2 远程文件包含      323<br>14 1.3 本地文件包含的利用技巧   323<br>14 2 变量覆盖漏洞    331<br>14 2 1.全局变量覆盖      331<br>14 2 2 extract（）变量覆盖     334<br>14 2 3 遍历初始化变量  334<br>14 2 4 import_request_variables 变量覆盖   335<br>14 2 5 parse_str（）变量覆盖  335<br>14 3 代码执行漏洞    336<br>14 3 1.“危险函数”执行代码      336<br>14 3 2 “文件写入”执行代码      343<br>14 3 3 其他执行代码方式   344<br>14 4 定制安全的 PHP 环境  348<br>14 5 小结  352</p>
-<h2 id="第-15-章-Web-Server-配置安全-353"><a href="#第-15-章-Web-Server-配置安全-353" class="headerlink" title="第 15 章 Web Server 配置安全  353"></a>第 15 章 Web Server 配置安全  353</h2><p>15 1.Apache 安全   353<br>15 2 Nginx 安全   354<br>15 3 jBoss 远程命令执行     356<br>15 4 Tomcat 远程命令执行  360<br>15 5 HTTP Parameter Pollution 363<br>15 6.小结  364</p>
-<h1 id="第四篇-互联网公司安全运营"><a href="#第四篇-互联网公司安全运营" class="headerlink" title="第四篇 互联网公司安全运营"></a>第四篇 互联网公司安全运营</h1><h2 id="第-16-章-互联网业务安全-366"><a href="#第-16-章-互联网业务安全-366" class="headerlink" title="第 16.章 互联网业务安全      366"></a>第 16.章 互联网业务安全      366</h2><p>16.1.产品需要什么样的安全   366<br>16.1.1.互联网产品对安全的需求   367<br>16.1.2 什么是好的安全方案  368<br>16.2 业务逻辑安全    370<br>16.2 1.永远改不掉的密码   370<br>16.2 2 谁是大赢家   371<br>16.2 3 瞒天过海   372<br>16.2 4 关于密码取回流程   373<br>16.3 账户是如何被盗的   374· ⅩⅤ ·<br>16.3 1.账户被盗的途径  374<br>16.3 2 分析账户被盗的原因  376<br>16.4 互联网的垃圾    377<br>16.4 1.垃圾的危害   377<br>16.4 2 垃圾处理   379<br>16.5 关于网络钓鱼    380<br>16.5 1.钓鱼网站简介      381<br>16.5 2 邮件钓鱼   383<br>16.5 3 钓鱼网站的防控  385<br>16.5 4 网购流程钓鱼      388<br>16.6.用户隐私保护    393<br>16.6.1.互联网的用户隐私挑战    393<br>16.6.2 如何保护用户隐私   394<br>16.6.3 Do-Not-Track   396<br>16.7 小结  397<br>（附）麻烦的终结者  398</p>
-<h2 id="第-17-章-安全开发流程（-SDL）-402"><a href="#第-17-章-安全开发流程（-SDL）-402" class="headerlink" title="第 17 章 安全开发流程（ SDL）     402"></a>第 17 章 安全开发流程（ SDL）     402</h2><p>17 1.SDL 简介   402<br>17 2 敏捷 SDL   406<br>17 3 SDL 实战经验    407<br>17 4 需求分析与设计阶段   409<br>17 5 开发阶段    415<br>17 5 1.提供安全的函数  415<br>17 5 2 代码安全审计工具   417<br>17 6.测试阶段    418<br>17 7 小结  420</p>
-<h2 id="第-18-章-安全运营-422"><a href="#第-18-章-安全运营-422" class="headerlink" title="第 18 章 安全运营   422"></a>第 18 章 安全运营   422</h2><p>18 1.把安全运营起来    422<br>18 2 漏洞修补流程    423<br>18 3 安全监控    424<br>18 4 入侵检测    425<br>18 5 紧急响应流程    428<br>18 6.小结  430<br>（附）谈谈互联网企业安全的发展方向   431</p>
-]]></content>
-      <categories>
-        <category>读书笔记</category>
-      </categories>
-      <tags>
-        <tag>信息安全</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo&amp;Github搭建私人博客</title>
     <url>/2021/09/15/Git-2102-hexo&amp;github%E6%90%AD%E5%BB%BA%E7%A7%81%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h1 id="Hexo-amp-Github搭建私人博客"><a href="#Hexo-amp-Github搭建私人博客" class="headerlink" title="Hexo&amp;Github搭建私人博客"></a>Hexo&amp;Github搭建私人博客</h1><h2 id="1-Hexo介绍"><a href="#1-Hexo介绍" class="headerlink" title="1 Hexo介绍"></a>1 Hexo介绍</h2><p><a href="https://hexo.io/zh-cn/">Hexo</a>是基于<code>NodeJs</code>的静态博客框架，简单、轻量，其生成的静态网页可以托管在<code>Github</code>和<code>Heroku</code>上。</p>
@@ -333,6 +215,124 @@ primary default info success warning danger -->
       </categories>
       <tags>
         <tag>tips</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git搭建本地远程仓库</title>
+    <url>/2021/09/15/Git-2101-Git%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h1 id="Git学习"><a href="#Git学习" class="headerlink" title="Git学习"></a>Git学习</h1><h2 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h2><h2 id="git配置本地远程仓库"><a href="#git配置本地远程仓库" class="headerlink" title="git配置本地远程仓库"></a>git配置本地远程仓库</h2><p>在本地的移动硬盘中创建git远程仓库，将电脑中的数据同步到git仓库中。</p>
+<h3 id="创建远程仓库"><a href="#创建远程仓库" class="headerlink" title="创建远程仓库"></a>创建远程仓库</h3><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd /Volumes/MacOS/<br>mkdir workSpace<br>cd workSpace<br>git init<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="关联远程仓库"><a href="#关联远程仓库" class="headerlink" title="关联远程仓库"></a>关联远程仓库</h3><figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd &quot;实际工作目录&quot;<br>git init   #初始化git目录<br>git add .  #添加修改至临时缓存区<br>git commit -m &quot;init&quot;  #提交至本地仓库<br>git remote add origin /Volumes/MacOS/workSpace  #关联远程仓库的位置<br>git push -u origin master #向远程仓库提交<br></code></pre></div></td></tr></table></figure>
+<p>此时会报错</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git push -u origin master<br><br>Counting objects: 4, done.<br>Delta compression using up to 16 threads.<br>Compressing objects: 100% (2/2), done.<br>Writing objects: 100% (4/4), 245 bytes | 0 bytes/s, done.<br>Total 4 (delta 0), reused 0 (delta 0)<br>remote: error: refusing to update checked out branch: refs/heads/master<br>remote: error: By default, updating the current branch in a non-bare repository<br>remote: error: is denied, because it will make the index and work tree inconsistent<br>remote: error: with what you pushed, and will require &#x27;git reset --hard&#x27; to match<br>remote: error: the work tree to HEAD.<br>remote: error: <br>remote: error: You can set &#x27;receive.denyCurrentBranch&#x27; configuration variable to<br>remote: error: &#x27;ignore&#x27; or &#x27;warn&#x27; in the remote repository to allow pushing into<br>remote: error: its current branch; however, this is not recommended unless you<br>remote: error: arranged to update its work tree to match what you pushed in some<br>remote: error: other way.<br>remote: error: <br>remote: error: To squelch this message and still keep the default behaviour, set<br>remote: error: &#x27;receive.denyCurrentBranch&#x27; configuration variable to &#x27;refuse&#x27;.<br>To /home/lu/Temp/git_server/Test/<br> ! [remote rejected] master -&gt; master (branch is currently checked out)<br>error: failed to push some refs to &#x27;/home/lu/Temp/git_server/Test/<br><br></code></pre></div></td></tr></table></figure>
+<p>因为我们的远程仓库也只是一般的仓库而不是裸仓库，如果是裸仓库的话就不会出现这个问题了。<br>根据错误提示，我们可以进行相应的配置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git config --global receive.denyCurrentBranch ignore<br></code></pre></div></td></tr></table></figure>
+<p>也可以直接修改配置文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">vim ~/.gitconfig<br><br>在文件中添加以下内容即可<br>[receive]<br>    denyCurrentBranch = ignore<br></code></pre></div></td></tr></table></figure>
+<p>配置完后，再push一次。</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">git push -u origin master<br><br>Counting objects: 4, done.<br>Delta compression using up to 16 threads.<br>Compressing objects: 100% (2/2), done.<br>Writing objects: 100% (4/4), 245 bytes | 0 bytes/s, done.<br>Total 4 (delta 0), reused 0 (delta 0)<br>To /home/lu/Temp/git_server/Test/<br> * [new branch]      master -&gt; master<br>Branch master set up to track remote branch master from origin.<br></code></pre></div></td></tr></table></figure>
+
+<p>提交上去了，但是目前远程仓库中还看不到提交的数据<br>git status可以看到，但是没有写到磁盘上</p>
+<h3 id="添加git-hook"><a href="#添加git-hook" class="headerlink" title="添加git hook"></a>添加git hook</h3><p>git hook是一个非常强大的功能，它可以监听我们对仓库的修改，继而触发相应的逻辑命令。这里为了完成同事的需求，只说说post-update，就是提交有代码更新到仓库时需要执行的操作。</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cd .git/hooks<br>mv post-update.sample post-update<br>vim post-update<br></code></pre></div></td></tr></table></figure>
+<p>修改内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">!/bin/sh</span><br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash"><span class="hljs-comment"># An example hook script to prepare a packed repository for use over</span></span><br><span class="hljs-meta">#</span><span class="bash"> dumb transports.</span><br><span class="hljs-meta">#</span><span class="bash"></span><br><span class="bash"><span class="hljs-comment"># To enable this hook, rename this file to &quot;post-update&quot;.</span></span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash"><span class="hljs-built_in">exec</span> git update-server-info</span><br>unset GIT_DIR<br>cd ..<br>git checkout -f<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="修改完成"><a href="#修改完成" class="headerlink" title="修改完成"></a>修改完成</h3><p>再次push</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">echo &quot;demo&quot; &gt; demo #修改某些文件<br>git add .<br>git commit -m &quot;add demo&quot;<br>git push<br>Counting objects: 3, done.<br>Delta compression using up to 16 threads.<br>Compressing objects: 100% (2/2), done.<br>Writing objects: 100% (3/3), 288 bytes | 0 bytes/s, done.<br>Total 3 (delta 0), reused 0 (delta 0)<br>To /home/lu/Temp/git_server/Test/<br>   7be5b2a..9da7116  master -&gt; master<br></code></pre></div></td></tr></table></figure>
+<p>提交之后可查看移动硬盘中的远程仓库，已经上传成功。</p>
+<h2 id="借助百度网盘实现实时同步"><a href="#借助百度网盘实现实时同步" class="headerlink" title="借助百度网盘实现实时同步"></a>借助百度网盘实现实时同步</h2><p>下载百度同步网盘MAC版<br><a href="https://pan.baidu.com/download#pan">https://pan.baidu.com/download#pan</a><br>百度网盘新建文件夹GitSpace，用于存放同步数据。<br>本地新建GitSpace，在此文件夹下创建各项目子文件夹及git仓库。<br>选择同步即可。</p>
+]]></content>
+      <categories>
+        <category>Git学习</category>
+      </categories>
+      <tags>
+        <tag>tips</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>白帽子讲Web安全</title>
+    <url>/2021/09/17/IS-2102-%E7%99%BD%E5%B8%BD%E5%AD%90%E8%AE%B2Web%E5%AE%89%E5%85%A8/</url>
+    <content><![CDATA[<p class="note note-danger">持续更新中。。。</p>
+<!--便签
+primary
+secondary
+success
+danger
+warning
+info
+light -->
+
+<p><span class="label label-info">信息安全</span>    <span class="label label-success">web安全</span></p>
+<!--行内标签
+primary default info success warning danger -->
+
+<h1 id="第一篇-世界观安全"><a href="#第一篇-世界观安全" class="headerlink" title="第一篇 世界观安全"></a>第一篇 世界观安全</h1><h2 id="第-1-章-我的安全世界观2"><a href="#第-1-章-我的安全世界观2" class="headerlink" title="第 1 章 我的安全世界观2"></a>第 1 章 我的安全世界观2</h2><h3 id="1-1-Web-安全简史-2"><a href="#1-1-Web-安全简史-2" class="headerlink" title="1.1 Web 安全简史 2"></a>1.1 Web 安全简史 2</h3><ol>
+<li>启蒙时代、黄金时代、黑暗时代</li>
+<li>黑客精神：open、free、share</li>
+</ol>
+<p>1.1.1 中国黑客简史 2</p>
+<p>1.1.2 黑客技术的发展历程3</p>
+<ol>
+<li>2003年冲击波蠕虫病毒，攻击Windows系统的RPC服务，445端口，网络运营商在骨干网络上屏蔽了135和445端口的连接请求。运营商加防火墙对网络的封锁，使得暴露在互联网上的非web服务越来越少，且web技术越来越成熟，最终成为主流。</li>
+<li>1.3 Web 安全的兴起 5</li>
+</ol>
+<h3 id="1-2-黑帽子，白帽子-6"><a href="#1-2-黑帽子，白帽子-6" class="headerlink" title="1.2 黑帽子，白帽子 6"></a>1.2 黑帽子，白帽子 6</h3><ol>
+<li>黑帽子为了完成一次入侵，需要理由各种不同漏洞的组合来达到目的，是在不断的组合问题；而白帽子在设计解决方案时，是不断地分解问题，再对分解后的问题逐个予以解决。</li>
+</ol>
+<h3 id="1-3-返璞归真，揭秘安全的本质7"><a href="#1-3-返璞归真，揭秘安全的本质7" class="headerlink" title="1.3 返璞归真，揭秘安全的本质7"></a>1.3 返璞归真，揭秘安全的本质7</h3><ol>
+<li>安全检查的过程，是划分出具有不同信任级别的区域，成为信任域，两个不同信任域之间的边界，成为信任边界。</li>
+<li>数据从高等级的信任域流向低等级的信任域，是不需要经过安全检查的，反之则需要；</li>
+<li><strong>安全问题的本质就是信任问题，一切安全方案设计的基础，都是建立在信任关系上的</strong></li>
+<li>很少假设极端的前提条件，极端的条件意味着小概率以及高成本，需要根据成本来设计安全方案，将一些可能性较大的条件作为决策的主要依据。</li>
+</ol>
+<h3 id="1-4-破除迷信，没有银弹-9"><a href="#1-4-破除迷信，没有银弹-9" class="headerlink" title="1.4 破除迷信，没有银弹  9"></a>1.4 破除迷信，没有银弹  9</h3><ol>
+<li>解决安全问题的过程中，不可能一劳永逸，也就是说“没有银弹”</li>
+</ol>
+<h3 id="1-5-安全三要素-10"><a href="#1-5-安全三要素-10" class="headerlink" title="1.5 安全三要素    10"></a>1.5 安全三要素    10</h3><ol>
+<li>信任关系被破坏，产生安全问题，通过信任域的划分、信任边界的确定，来发现问题是何处产生的。</li>
+<li>安全三要素（CIA）：机密性（Confidentiality）、完整性（Integrity）、可用性（Available）</li>
+</ol>
+<h3 id="1-6-如何实施安全评估-11"><a href="#1-6-如何实施安全评估-11" class="headerlink" title="1.6 如何实施安全评估     11"></a>1.6 如何实施安全评估     11</h3><ol>
+<li>资产等级划分</li>
+<li>威胁分析</li>
+<li>风险分析</li>
+<li>确认解决方案</li>
+</ol>
+<p>1.6.1 资产等级划分    12</p>
+<p>1.6.2 威胁分析  13</p>
+<p>1.6.3 风险分析  14</p>
+<p>1.6.4 设计安全方案    15</p>
+<h3 id="1-7-白帽子兵法-16"><a href="#1-7-白帽子兵法-16" class="headerlink" title="1.7 白帽子兵法    16"></a>1.7 白帽子兵法    16</h3><p>1.7.1.Secure By Default 原则  16</p>
+<p>1.7.2 纵深防御原则    18</p>
+<p>1.7.3 数据与代码分离原则   19</p>
+<p>1.7.4 不可预测性原则  21</p>
+<p>1.8 小结      22</p>
+<p>（附）谁来为漏洞买单？      23</p>
+<h1 id="第二篇-客户端脚本安全"><a href="#第二篇-客户端脚本安全" class="headerlink" title="第二篇 客户端脚本安全"></a>第二篇 客户端脚本安全</h1><h2 id="第-2-章-浏览器安全-26"><a href="#第-2-章-浏览器安全-26" class="headerlink" title="第 2 章 浏览器安全 26"></a>第 2 章 浏览器安全 26</h2><p>2 1.同源策略     26<br>2 2 浏览器沙箱    30<br>2 3 恶意网址拦截  33<br>2 4 高速发展的浏览器安全   36· Ⅹ ·<br>2 5 小结      39</p>
+<h2 id="第-3-章-跨站脚本攻击（-XSS）-40"><a href="#第-3-章-跨站脚本攻击（-XSS）-40" class="headerlink" title="第 3 章 跨站脚本攻击（ XSS）   40"></a>第 3 章 跨站脚本攻击（ XSS）   40</h2><p>3 1.ⅩSS 简介    40<br>3 2 ⅩSS 攻击进阶  43<br>3 2 1.初探 ⅩSS Payload    43<br>3 2 2 强大的 ⅩSS Payload     46<br>3 2 3 ⅩSS 攻击平台  62<br>3 2 4 终极武器： ⅩSS Worm 64<br>3 2 5 调试 JavaScript  73<br>3 2 6.ⅩSS 构造技巧   76<br>3 2 7 变废为宝： Mission Impossible    82<br>3 2 8 容易被忽视的角落： Flash ⅩSS   85<br>3 2 9 真的高枕无忧吗： JavaScript 开发框架    87<br>3 3 ⅩSS 的防御    89<br>3 3 1.四两拨千斤： HttpOnly  89<br>3 3 2 输入检查  93<br>3 3 3 输出检查  95<br>3 3 4 正确地防御 ⅩSS      99<br>3 3 5 处理富文本     102<br>3 3 6.防御 DOM Based ⅩSS 103<br>3 3 7 换个角度看 ⅩSS 的风险     107<br>3 4 小结    107</p>
+<h2 id="第-4-章-跨站点请求伪造（-CSRF）-109"><a href="#第-4-章-跨站点请求伪造（-CSRF）-109" class="headerlink" title="第 4 章 跨站点请求伪造（ CSRF）    109"></a>第 4 章 跨站点请求伪造（ CSRF）    109</h2><p>4 1.CSRF 简介   109<br>4 2 CSRF 进阶   111<br>4 2 1.浏览器的 Cookie 策略  111<br>4 2 2 P3P 头的副作用     113<br>4 2 3 GET？ POST？   116<br>4 2 4 Flash CSRF 118<br>4 2 5 CSRF Worm    119<br>4 3 CSRF 的防御 120<br>4 3 1.验证码  120<br>4 3 2 Referer Check  120<br>4 3 3 Anti CSRF Token   121<br>4 4 小结    124</p>
+<h2 id="第-5-章-点击劫持（-ClickJacking）-125"><a href="#第-5-章-点击劫持（-ClickJacking）-125" class="headerlink" title="第 5 章 点击劫持（ ClickJacking）     125"></a>第 5 章 点击劫持（ ClickJacking）     125</h2><p>5 1.什么是点击劫持  125· ⅩI ·<br>5 2 Flash 点击劫持    127<br>5 3 图片覆盖攻击      129<br>5 4 拖拽劫持与数据窃取     131<br>5 5 ClickJacking 3 0：触屏劫持  134<br>5 6.防御 ClickJacking    136<br>5 6.1.frame busting   136<br>5 6.2 Ⅹ-Frame-Options    137<br>5 7 小结    138</p>
+<h2 id="第-6-章-HTML-5-安全-139"><a href="#第-6-章-HTML-5-安全-139" class="headerlink" title="第 6.章 HTML 5 安全  139"></a>第 6.章 HTML 5 安全  139</h2><p>6.1.HTML 5 新标签   139<br>6.1.1.新标签的 ⅩSS 139<br>6.1.2 iframe 的 sandbox   140<br>6.1.3 Link Types： noreferrer  141<br>6.1.4 Canvas 的妙用   141<br>6.2 其他安全问题      144<br>6.2 1.Cross-Origin Resource Sharing   144<br>6.2 2 postMessage——跨窗口传递消息    146<br>6.2 3 Web Storage    147<br>6.3 小结    150</p>
+<h1 id="第三篇-服务器端应用安全"><a href="#第三篇-服务器端应用安全" class="headerlink" title="第三篇 服务器端应用安全"></a>第三篇 服务器端应用安全</h1><h2 id="第-7-章-注入攻击-152"><a href="#第-7-章-注入攻击-152" class="headerlink" title="第 7 章 注入攻击   152"></a>第 7 章 注入攻击   152</h2><p>7 1.SQL 注入  152<br>7 1.1.盲注（ Blind Injection）      153<br>7 1.2 Timing Attack  155<br>7 2 数据库攻击技巧  157<br>7 2 1.常见的攻击技巧    157<br>7 2 2 命令执行    158<br>7 2 3 攻击存储过程  164<br>7 2 4 编码问题    165<br>7 2 5 SQL Column Truncation      167<br>7 3 正确地防御 SQL 注入   170<br>7 3 1.使用预编译语句    171<br>7 3 2 使用存储过程  172<br>7 3 3 检查数据类型  172<br>7 3 4 使用安全函数  172<br>7 4 其他注入攻击      173· ⅩII ·<br>7 4 1.ⅩML 注入   173<br>7 4 2 代码注入    174<br>7 4 3 CRLF 注入  176<br>7 5 小结    179</p>
+<h2 id="第-8-章-文件上传漏洞-180"><a href="#第-8-章-文件上传漏洞-180" class="headerlink" title="第 8 章 文件上传漏洞 180"></a>第 8 章 文件上传漏洞 180</h2><p>8 1.文件上传漏洞概述   180<br>8 1.1.从 FCKEditor 文件上传漏洞谈起     181<br>8 1.2 绕过文件上传检查功能      182<br>8 2 功能还是漏洞      183<br>8 2 1.Apache 文件解析问题 184<br>8 2 2 IIS 文件解析问题   185<br>8 2 3 PHP CGI 路径解析问题      187<br>8 2 4 利用上传文件钓鱼     189<br>8 3 设计安全的文件上传功能 190<br>8 4 小结    191</p>
+<h2 id="第-9-章-认证与会话管理-192"><a href="#第-9-章-认证与会话管理-192" class="headerlink" title="第 9 章 认证与会话管理  192"></a>第 9 章 认证与会话管理  192</h2><p>9 1.Who am I？    192<br>9 2 密码的那些事儿  193<br>9 3 多因素认证  195<br>9 4 Session 与认证     196<br>9 5 Session Fixation 攻击     198<br>9 6.Session 保持攻击     199<br>9 7 单点登录（ SSO）    201<br>9 8 小结    203</p>
+<h2 id="第-10-章-访问控制-205"><a href="#第-10-章-访问控制-205" class="headerlink" title="第 10 章 访问控制   205"></a>第 10 章 访问控制   205</h2><p>10 1.What Can I Do？  205<br>10 2 垂直权限管理    208<br>10 3 水平权限管理    211<br>10 4 OAuth 简介  213<br>10 5 小结  219</p>
+<h2 id="第-11-章-加密算法与随机数-220"><a href="#第-11-章-加密算法与随机数-220" class="headerlink" title="第 11.章 加密算法与随机数  220"></a>第 11.章 加密算法与随机数  220</h2><p>11.1.概述  220<br>11.2 Stream Cipher Attack    222<br>11.2 1.Reused Key Attack    222<br>11.2 2 Bit-flipping Attack    228<br>11.2 3 弱随机 IⅤ 问题    230· ⅩIII ·<br>11.3 WEP 破解   232<br>11.4 ECB 模式的缺陷    236<br>11.5 Padding Oracle Attack   239<br>11.6.密钥管理    251<br>11.7 伪随机数问题    253<br>11.7 1.弱伪随机数的麻烦   253<br>11.7 2 时间真的随机吗  256<br>11.7 3 破解伪随机数算法的种子   257<br>11.7 4 使用安全的随机数   265<br>11.8 小结  265<br>（附） Understanding MD5 Length Extension Attack  267</p>
+<h2 id="第-12-章-Web-框架安全-280"><a href="#第-12-章-Web-框架安全-280" class="headerlink" title="第 12 章 Web 框架安全   280"></a>第 12 章 Web 框架安全   280</h2><p>12 1.MⅤC 框架安全  280<br>12 2 模板引擎与 ⅩSS 防御  282<br>12 3 Web 框架与 CSRF 防御   285<br>12 4 HTTP Headers 管理      287<br>12 5 数据持久层与 SQL 注入  288<br>12 6.还能想到什么    289<br>12 7 Web 框架自身安全   289<br>12 7 1.Struts 2 命令执行漏洞  290<br>12 7 2 Struts 2 的问题补丁  291<br>12 7 3 Spring MⅤC 命令执行漏洞     292<br>12 7 4 Django 命令执行漏洞   293<br>12 8 小结  294</p>
+<h2 id="第-13-章-应用层拒绝服务攻击-295"><a href="#第-13-章-应用层拒绝服务攻击-295" class="headerlink" title="第 13 章 应用层拒绝服务攻击  295"></a>第 13 章 应用层拒绝服务攻击  295</h2><p>13 1.DDOS 简介  295<br>13 2 应用层 DDOS    297<br>13 2 1.CC 攻击    297<br>13 2 2 限制请求频率      298<br>13 2 3 道高一尺，魔高一丈  300<br>13 3 验证码的那些事儿   301<br>13 4 防御应用层 DDOS   304<br>13 5 资源耗尽攻击    306<br>13 5 1.Slowloris 攻击     306<br>13 5 2 HTTP POST DOS 309<br>13 5 3 Server Limit DOS 310<br>13 6.一个正则引发的血案： ReDOS      311· ⅩIⅤ ·<br>13 7 小结  315</p>
+<h2 id="第-14-章-PHP-安全-317"><a href="#第-14-章-PHP-安全-317" class="headerlink" title="第 14 章 PHP 安全      317"></a>第 14 章 PHP 安全      317</h2><p>14 1.文件包含漏洞    317<br>14 1.1.本地文件包含      319<br>14 1.2 远程文件包含      323<br>14 1.3 本地文件包含的利用技巧   323<br>14 2 变量覆盖漏洞    331<br>14 2 1.全局变量覆盖      331<br>14 2 2 extract（）变量覆盖     334<br>14 2 3 遍历初始化变量  334<br>14 2 4 import_request_variables 变量覆盖   335<br>14 2 5 parse_str（）变量覆盖  335<br>14 3 代码执行漏洞    336<br>14 3 1.“危险函数”执行代码      336<br>14 3 2 “文件写入”执行代码      343<br>14 3 3 其他执行代码方式   344<br>14 4 定制安全的 PHP 环境  348<br>14 5 小结  352</p>
+<h2 id="第-15-章-Web-Server-配置安全-353"><a href="#第-15-章-Web-Server-配置安全-353" class="headerlink" title="第 15 章 Web Server 配置安全  353"></a>第 15 章 Web Server 配置安全  353</h2><p>15 1.Apache 安全   353<br>15 2 Nginx 安全   354<br>15 3 jBoss 远程命令执行     356<br>15 4 Tomcat 远程命令执行  360<br>15 5 HTTP Parameter Pollution 363<br>15 6.小结  364</p>
+<h1 id="第四篇-互联网公司安全运营"><a href="#第四篇-互联网公司安全运营" class="headerlink" title="第四篇 互联网公司安全运营"></a>第四篇 互联网公司安全运营</h1><h2 id="第-16-章-互联网业务安全-366"><a href="#第-16-章-互联网业务安全-366" class="headerlink" title="第 16.章 互联网业务安全      366"></a>第 16.章 互联网业务安全      366</h2><p>16.1.产品需要什么样的安全   366<br>16.1.1.互联网产品对安全的需求   367<br>16.1.2 什么是好的安全方案  368<br>16.2 业务逻辑安全    370<br>16.2 1.永远改不掉的密码   370<br>16.2 2 谁是大赢家   371<br>16.2 3 瞒天过海   372<br>16.2 4 关于密码取回流程   373<br>16.3 账户是如何被盗的   374· ⅩⅤ ·<br>16.3 1.账户被盗的途径  374<br>16.3 2 分析账户被盗的原因  376<br>16.4 互联网的垃圾    377<br>16.4 1.垃圾的危害   377<br>16.4 2 垃圾处理   379<br>16.5 关于网络钓鱼    380<br>16.5 1.钓鱼网站简介      381<br>16.5 2 邮件钓鱼   383<br>16.5 3 钓鱼网站的防控  385<br>16.5 4 网购流程钓鱼      388<br>16.6.用户隐私保护    393<br>16.6.1.互联网的用户隐私挑战    393<br>16.6.2 如何保护用户隐私   394<br>16.6.3 Do-Not-Track   396<br>16.7 小结  397<br>（附）麻烦的终结者  398</p>
+<h2 id="第-17-章-安全开发流程（-SDL）-402"><a href="#第-17-章-安全开发流程（-SDL）-402" class="headerlink" title="第 17 章 安全开发流程（ SDL）     402"></a>第 17 章 安全开发流程（ SDL）     402</h2><p>17 1.SDL 简介   402<br>17 2 敏捷 SDL   406<br>17 3 SDL 实战经验    407<br>17 4 需求分析与设计阶段   409<br>17 5 开发阶段    415<br>17 5 1.提供安全的函数  415<br>17 5 2 代码安全审计工具   417<br>17 6.测试阶段    418<br>17 7 小结  420</p>
+<h2 id="第-18-章-安全运营-422"><a href="#第-18-章-安全运营-422" class="headerlink" title="第 18 章 安全运营   422"></a>第 18 章 安全运营   422</h2><p>18 1.把安全运营起来    422<br>18 2 漏洞修补流程    423<br>18 3 安全监控    424<br>18 4 入侵检测    425<br>18 5 紧急响应流程    428<br>18 6.小结  430<br>（附）谈谈互联网企业安全的发展方向   431</p>
+]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>信息安全</tag>
       </tags>
   </entry>
   <entry>
